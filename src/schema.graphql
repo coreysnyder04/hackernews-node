@@ -1,6 +1,6 @@
 type Query {
     info: String!
-    feed(filter: String, skip: Int, first: Int): [Link!]!
+    feed(filter: String, skip: Int, first: Int, orderBy: LinkOrderByInput): [Link!]!
     link(id: String!): Link!
 }
 
@@ -42,4 +42,13 @@ type User {
   name: String!
   email: String!
   links: [Link!]!
+}
+
+enum LinkOrderByInput {
+  description_ASC
+  description_DESC
+  url_ASC
+  url_DESC
+  createdAt_ASC
+  createdAt_DESC
 }
