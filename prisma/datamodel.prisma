@@ -14,10 +14,43 @@ type User {
     password: String!
     links: [Link!]!
     votes: [Vote!]!
+    flightControllers: [FlightController!]!
 }
 
 type Vote{
     id: ID! @id
     link: Link!
     user: User!
+}
+
+type FlightController{
+    id: ID! @id
+    name: String!
+    releaseDate: DateTime!
+    uarts: Int!
+    GyroOne: Float
+    GyroTwo: Float
+    weightInGrams: Float
+    cpu: String!
+    dimensions: String
+    holePattern: String!
+    voltageInputMin: Float!
+    voltageInputMax: Float!
+    osd: Boolean!
+    accelerometer: Boolean!
+    barometer: Boolean!
+    spektrumPort: Boolean!
+    usbInterface: Boolean!
+    LedWS2812Support: Boolean!
+    RSSIPad: Boolean!
+    currentSensor: Boolean!
+    beeperPad: Boolean!
+    beeperOnBoard: Boolean!
+    antiVibrationGrommets: Boolean!
+    builtInReceiver: String #"CROSSFIRE/DSMX/FRSKY"
+    postedBy: User!
+    ThreeVoltOutput: Boolean
+    FiveVoltOut: Boolean
+    CameraControl: Boolean
+
 }

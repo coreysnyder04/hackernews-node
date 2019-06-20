@@ -2,10 +2,40 @@ type Query {
     info: String!
     feed(filter: String, skip: Int, first: Int, orderBy: LinkOrderByInput): Feed!
     link(id: String!): Link!
+    flightControllerFeed : FlightControllerFeed!
+    userList: UserList!
 }
 
 type Mutation {
-    post(url: String!, description: String!): Link!
+    post(
+      url: String!,
+      description: String!
+    ): Link!
+    addFlightController(
+      name: String!,
+      releaseDate: String!,
+      uarts: Int!,
+      GyroOne: Float,
+      GyroTwo: Float,
+      weightInGrams: Float,
+      cpu: String!,
+      dimensions: String,
+      holePattern: String!,
+      voltageInputMin: Float!,
+      voltageInputMax: Float!,
+      osd: Boolean!,
+      accelerometer: Boolean!,
+      barometer: Boolean!,
+      spektrumPort: Boolean!,
+      usbInterface: Boolean!,
+      LedWS2812Support: Boolean!,
+      RSSIPad: Boolean!,
+      currentSensor: Boolean!,
+      beeperPad: Boolean!,
+      beeperOnBoard: Boolean!,
+      antiVibrationGrommets: Boolean!,
+      builtInReceiver: String
+    ) : FlightController!
     signup(email: String!, password: String!, name: String!): AuthPayload
     login(email: String!, password: String!): AuthPayload
     updateLink(id: ID!, url: String, description: String): Link
@@ -24,6 +54,15 @@ type Vote {
   user: User!
 }
 
+type FlightControllerFeed {
+  flightControllers: [FlightController!]!
+  count: Int!
+}
+
+type UserList {
+  users: [User!]!
+}
+
 type Feed {
   links: [Link!]!
   count: Int!
@@ -37,6 +76,34 @@ type Link {
     votes: [Vote!]!
 }
 
+type FlightController {
+  id: ID!
+  name: String!
+  releaseDate: String!
+  uarts: Int!
+  GyroOne: Float
+  GyroTwo: Float
+  weightInGrams: Float
+  cpu: String!
+  dimensions: String
+  holePattern: String!
+  voltageInputMin: Float!
+  voltageInputMax: Float!
+  osd: Boolean!
+  accelerometer: Boolean!
+  barometer: Boolean!
+  spektrumPort: Boolean!
+  usbInterface: Boolean!
+  LedWS2812Support: Boolean!
+  RSSIPad: Boolean!
+  currentSensor: Boolean!
+  beeperPad: Boolean!
+  beeperOnBoard: Boolean!
+  antiVibrationGrommets: Boolean!
+  builtInReceiver: String
+  postedBy: User
+}
+
 type AuthPayload {
   token: String
   user: User
@@ -47,6 +114,13 @@ type User {
   name: String!
   email: String!
   links: [Link!]!
+  flightControllers: [FlightController!]!
+}
+
+enum ReceiverProtocol{
+  CROSSFIRE
+  DSMX
+  FRSKY
 }
 
 enum LinkOrderByInput {

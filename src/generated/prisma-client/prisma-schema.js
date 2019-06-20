@@ -3,7 +3,11 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateLink {
+/* GraphQL */ `type AggregateFlightController {
+  count: Int!
+}
+
+type AggregateLink {
   count: Int!
 }
 
@@ -20,6 +24,717 @@ type BatchPayload {
 }
 
 scalar DateTime
+
+type FlightController {
+  id: ID!
+  name: String!
+  releaseDate: DateTime!
+  uarts: Int!
+  GyroOne: Float
+  GyroTwo: Float
+  weightInGrams: Float
+  cpu: String!
+  dimensions: String
+  holePattern: String!
+  voltageInputMin: Float!
+  voltageInputMax: Float!
+  osd: Boolean!
+  accelerometer: Boolean!
+  barometer: Boolean!
+  spektrumPort: Boolean!
+  usbInterface: Boolean!
+  LedWS2812Support: Boolean!
+  RSSIPad: Boolean!
+  currentSensor: Boolean!
+  beeperPad: Boolean!
+  beeperOnBoard: Boolean!
+  antiVibrationGrommets: Boolean!
+  builtInReceiver: String
+  postedBy: User!
+  ThreeVoltOutput: Boolean
+  FiveVoltOut: Boolean
+  CameraControl: Boolean
+}
+
+type FlightControllerConnection {
+  pageInfo: PageInfo!
+  edges: [FlightControllerEdge]!
+  aggregate: AggregateFlightController!
+}
+
+input FlightControllerCreateInput {
+  id: ID
+  name: String!
+  releaseDate: DateTime!
+  uarts: Int!
+  GyroOne: Float
+  GyroTwo: Float
+  weightInGrams: Float
+  cpu: String!
+  dimensions: String
+  holePattern: String!
+  voltageInputMin: Float!
+  voltageInputMax: Float!
+  osd: Boolean!
+  accelerometer: Boolean!
+  barometer: Boolean!
+  spektrumPort: Boolean!
+  usbInterface: Boolean!
+  LedWS2812Support: Boolean!
+  RSSIPad: Boolean!
+  currentSensor: Boolean!
+  beeperPad: Boolean!
+  beeperOnBoard: Boolean!
+  antiVibrationGrommets: Boolean!
+  builtInReceiver: String
+  postedBy: UserCreateOneWithoutFlightControllersInput!
+  ThreeVoltOutput: Boolean
+  FiveVoltOut: Boolean
+  CameraControl: Boolean
+}
+
+input FlightControllerCreateManyWithoutPostedByInput {
+  create: [FlightControllerCreateWithoutPostedByInput!]
+  connect: [FlightControllerWhereUniqueInput!]
+}
+
+input FlightControllerCreateWithoutPostedByInput {
+  id: ID
+  name: String!
+  releaseDate: DateTime!
+  uarts: Int!
+  GyroOne: Float
+  GyroTwo: Float
+  weightInGrams: Float
+  cpu: String!
+  dimensions: String
+  holePattern: String!
+  voltageInputMin: Float!
+  voltageInputMax: Float!
+  osd: Boolean!
+  accelerometer: Boolean!
+  barometer: Boolean!
+  spektrumPort: Boolean!
+  usbInterface: Boolean!
+  LedWS2812Support: Boolean!
+  RSSIPad: Boolean!
+  currentSensor: Boolean!
+  beeperPad: Boolean!
+  beeperOnBoard: Boolean!
+  antiVibrationGrommets: Boolean!
+  builtInReceiver: String
+  ThreeVoltOutput: Boolean
+  FiveVoltOut: Boolean
+  CameraControl: Boolean
+}
+
+type FlightControllerEdge {
+  node: FlightController!
+  cursor: String!
+}
+
+enum FlightControllerOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  releaseDate_ASC
+  releaseDate_DESC
+  uarts_ASC
+  uarts_DESC
+  GyroOne_ASC
+  GyroOne_DESC
+  GyroTwo_ASC
+  GyroTwo_DESC
+  weightInGrams_ASC
+  weightInGrams_DESC
+  cpu_ASC
+  cpu_DESC
+  dimensions_ASC
+  dimensions_DESC
+  holePattern_ASC
+  holePattern_DESC
+  voltageInputMin_ASC
+  voltageInputMin_DESC
+  voltageInputMax_ASC
+  voltageInputMax_DESC
+  osd_ASC
+  osd_DESC
+  accelerometer_ASC
+  accelerometer_DESC
+  barometer_ASC
+  barometer_DESC
+  spektrumPort_ASC
+  spektrumPort_DESC
+  usbInterface_ASC
+  usbInterface_DESC
+  LedWS2812Support_ASC
+  LedWS2812Support_DESC
+  RSSIPad_ASC
+  RSSIPad_DESC
+  currentSensor_ASC
+  currentSensor_DESC
+  beeperPad_ASC
+  beeperPad_DESC
+  beeperOnBoard_ASC
+  beeperOnBoard_DESC
+  antiVibrationGrommets_ASC
+  antiVibrationGrommets_DESC
+  builtInReceiver_ASC
+  builtInReceiver_DESC
+  ThreeVoltOutput_ASC
+  ThreeVoltOutput_DESC
+  FiveVoltOut_ASC
+  FiveVoltOut_DESC
+  CameraControl_ASC
+  CameraControl_DESC
+}
+
+type FlightControllerPreviousValues {
+  id: ID!
+  name: String!
+  releaseDate: DateTime!
+  uarts: Int!
+  GyroOne: Float
+  GyroTwo: Float
+  weightInGrams: Float
+  cpu: String!
+  dimensions: String
+  holePattern: String!
+  voltageInputMin: Float!
+  voltageInputMax: Float!
+  osd: Boolean!
+  accelerometer: Boolean!
+  barometer: Boolean!
+  spektrumPort: Boolean!
+  usbInterface: Boolean!
+  LedWS2812Support: Boolean!
+  RSSIPad: Boolean!
+  currentSensor: Boolean!
+  beeperPad: Boolean!
+  beeperOnBoard: Boolean!
+  antiVibrationGrommets: Boolean!
+  builtInReceiver: String
+  ThreeVoltOutput: Boolean
+  FiveVoltOut: Boolean
+  CameraControl: Boolean
+}
+
+input FlightControllerScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  releaseDate: DateTime
+  releaseDate_not: DateTime
+  releaseDate_in: [DateTime!]
+  releaseDate_not_in: [DateTime!]
+  releaseDate_lt: DateTime
+  releaseDate_lte: DateTime
+  releaseDate_gt: DateTime
+  releaseDate_gte: DateTime
+  uarts: Int
+  uarts_not: Int
+  uarts_in: [Int!]
+  uarts_not_in: [Int!]
+  uarts_lt: Int
+  uarts_lte: Int
+  uarts_gt: Int
+  uarts_gte: Int
+  GyroOne: Float
+  GyroOne_not: Float
+  GyroOne_in: [Float!]
+  GyroOne_not_in: [Float!]
+  GyroOne_lt: Float
+  GyroOne_lte: Float
+  GyroOne_gt: Float
+  GyroOne_gte: Float
+  GyroTwo: Float
+  GyroTwo_not: Float
+  GyroTwo_in: [Float!]
+  GyroTwo_not_in: [Float!]
+  GyroTwo_lt: Float
+  GyroTwo_lte: Float
+  GyroTwo_gt: Float
+  GyroTwo_gte: Float
+  weightInGrams: Float
+  weightInGrams_not: Float
+  weightInGrams_in: [Float!]
+  weightInGrams_not_in: [Float!]
+  weightInGrams_lt: Float
+  weightInGrams_lte: Float
+  weightInGrams_gt: Float
+  weightInGrams_gte: Float
+  cpu: String
+  cpu_not: String
+  cpu_in: [String!]
+  cpu_not_in: [String!]
+  cpu_lt: String
+  cpu_lte: String
+  cpu_gt: String
+  cpu_gte: String
+  cpu_contains: String
+  cpu_not_contains: String
+  cpu_starts_with: String
+  cpu_not_starts_with: String
+  cpu_ends_with: String
+  cpu_not_ends_with: String
+  dimensions: String
+  dimensions_not: String
+  dimensions_in: [String!]
+  dimensions_not_in: [String!]
+  dimensions_lt: String
+  dimensions_lte: String
+  dimensions_gt: String
+  dimensions_gte: String
+  dimensions_contains: String
+  dimensions_not_contains: String
+  dimensions_starts_with: String
+  dimensions_not_starts_with: String
+  dimensions_ends_with: String
+  dimensions_not_ends_with: String
+  holePattern: String
+  holePattern_not: String
+  holePattern_in: [String!]
+  holePattern_not_in: [String!]
+  holePattern_lt: String
+  holePattern_lte: String
+  holePattern_gt: String
+  holePattern_gte: String
+  holePattern_contains: String
+  holePattern_not_contains: String
+  holePattern_starts_with: String
+  holePattern_not_starts_with: String
+  holePattern_ends_with: String
+  holePattern_not_ends_with: String
+  voltageInputMin: Float
+  voltageInputMin_not: Float
+  voltageInputMin_in: [Float!]
+  voltageInputMin_not_in: [Float!]
+  voltageInputMin_lt: Float
+  voltageInputMin_lte: Float
+  voltageInputMin_gt: Float
+  voltageInputMin_gte: Float
+  voltageInputMax: Float
+  voltageInputMax_not: Float
+  voltageInputMax_in: [Float!]
+  voltageInputMax_not_in: [Float!]
+  voltageInputMax_lt: Float
+  voltageInputMax_lte: Float
+  voltageInputMax_gt: Float
+  voltageInputMax_gte: Float
+  osd: Boolean
+  osd_not: Boolean
+  accelerometer: Boolean
+  accelerometer_not: Boolean
+  barometer: Boolean
+  barometer_not: Boolean
+  spektrumPort: Boolean
+  spektrumPort_not: Boolean
+  usbInterface: Boolean
+  usbInterface_not: Boolean
+  LedWS2812Support: Boolean
+  LedWS2812Support_not: Boolean
+  RSSIPad: Boolean
+  RSSIPad_not: Boolean
+  currentSensor: Boolean
+  currentSensor_not: Boolean
+  beeperPad: Boolean
+  beeperPad_not: Boolean
+  beeperOnBoard: Boolean
+  beeperOnBoard_not: Boolean
+  antiVibrationGrommets: Boolean
+  antiVibrationGrommets_not: Boolean
+  builtInReceiver: String
+  builtInReceiver_not: String
+  builtInReceiver_in: [String!]
+  builtInReceiver_not_in: [String!]
+  builtInReceiver_lt: String
+  builtInReceiver_lte: String
+  builtInReceiver_gt: String
+  builtInReceiver_gte: String
+  builtInReceiver_contains: String
+  builtInReceiver_not_contains: String
+  builtInReceiver_starts_with: String
+  builtInReceiver_not_starts_with: String
+  builtInReceiver_ends_with: String
+  builtInReceiver_not_ends_with: String
+  ThreeVoltOutput: Boolean
+  ThreeVoltOutput_not: Boolean
+  FiveVoltOut: Boolean
+  FiveVoltOut_not: Boolean
+  CameraControl: Boolean
+  CameraControl_not: Boolean
+  AND: [FlightControllerScalarWhereInput!]
+  OR: [FlightControllerScalarWhereInput!]
+  NOT: [FlightControllerScalarWhereInput!]
+}
+
+type FlightControllerSubscriptionPayload {
+  mutation: MutationType!
+  node: FlightController
+  updatedFields: [String!]
+  previousValues: FlightControllerPreviousValues
+}
+
+input FlightControllerSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: FlightControllerWhereInput
+  AND: [FlightControllerSubscriptionWhereInput!]
+  OR: [FlightControllerSubscriptionWhereInput!]
+  NOT: [FlightControllerSubscriptionWhereInput!]
+}
+
+input FlightControllerUpdateInput {
+  name: String
+  releaseDate: DateTime
+  uarts: Int
+  GyroOne: Float
+  GyroTwo: Float
+  weightInGrams: Float
+  cpu: String
+  dimensions: String
+  holePattern: String
+  voltageInputMin: Float
+  voltageInputMax: Float
+  osd: Boolean
+  accelerometer: Boolean
+  barometer: Boolean
+  spektrumPort: Boolean
+  usbInterface: Boolean
+  LedWS2812Support: Boolean
+  RSSIPad: Boolean
+  currentSensor: Boolean
+  beeperPad: Boolean
+  beeperOnBoard: Boolean
+  antiVibrationGrommets: Boolean
+  builtInReceiver: String
+  postedBy: UserUpdateOneRequiredWithoutFlightControllersInput
+  ThreeVoltOutput: Boolean
+  FiveVoltOut: Boolean
+  CameraControl: Boolean
+}
+
+input FlightControllerUpdateManyDataInput {
+  name: String
+  releaseDate: DateTime
+  uarts: Int
+  GyroOne: Float
+  GyroTwo: Float
+  weightInGrams: Float
+  cpu: String
+  dimensions: String
+  holePattern: String
+  voltageInputMin: Float
+  voltageInputMax: Float
+  osd: Boolean
+  accelerometer: Boolean
+  barometer: Boolean
+  spektrumPort: Boolean
+  usbInterface: Boolean
+  LedWS2812Support: Boolean
+  RSSIPad: Boolean
+  currentSensor: Boolean
+  beeperPad: Boolean
+  beeperOnBoard: Boolean
+  antiVibrationGrommets: Boolean
+  builtInReceiver: String
+  ThreeVoltOutput: Boolean
+  FiveVoltOut: Boolean
+  CameraControl: Boolean
+}
+
+input FlightControllerUpdateManyMutationInput {
+  name: String
+  releaseDate: DateTime
+  uarts: Int
+  GyroOne: Float
+  GyroTwo: Float
+  weightInGrams: Float
+  cpu: String
+  dimensions: String
+  holePattern: String
+  voltageInputMin: Float
+  voltageInputMax: Float
+  osd: Boolean
+  accelerometer: Boolean
+  barometer: Boolean
+  spektrumPort: Boolean
+  usbInterface: Boolean
+  LedWS2812Support: Boolean
+  RSSIPad: Boolean
+  currentSensor: Boolean
+  beeperPad: Boolean
+  beeperOnBoard: Boolean
+  antiVibrationGrommets: Boolean
+  builtInReceiver: String
+  ThreeVoltOutput: Boolean
+  FiveVoltOut: Boolean
+  CameraControl: Boolean
+}
+
+input FlightControllerUpdateManyWithoutPostedByInput {
+  create: [FlightControllerCreateWithoutPostedByInput!]
+  delete: [FlightControllerWhereUniqueInput!]
+  connect: [FlightControllerWhereUniqueInput!]
+  set: [FlightControllerWhereUniqueInput!]
+  disconnect: [FlightControllerWhereUniqueInput!]
+  update: [FlightControllerUpdateWithWhereUniqueWithoutPostedByInput!]
+  upsert: [FlightControllerUpsertWithWhereUniqueWithoutPostedByInput!]
+  deleteMany: [FlightControllerScalarWhereInput!]
+  updateMany: [FlightControllerUpdateManyWithWhereNestedInput!]
+}
+
+input FlightControllerUpdateManyWithWhereNestedInput {
+  where: FlightControllerScalarWhereInput!
+  data: FlightControllerUpdateManyDataInput!
+}
+
+input FlightControllerUpdateWithoutPostedByDataInput {
+  name: String
+  releaseDate: DateTime
+  uarts: Int
+  GyroOne: Float
+  GyroTwo: Float
+  weightInGrams: Float
+  cpu: String
+  dimensions: String
+  holePattern: String
+  voltageInputMin: Float
+  voltageInputMax: Float
+  osd: Boolean
+  accelerometer: Boolean
+  barometer: Boolean
+  spektrumPort: Boolean
+  usbInterface: Boolean
+  LedWS2812Support: Boolean
+  RSSIPad: Boolean
+  currentSensor: Boolean
+  beeperPad: Boolean
+  beeperOnBoard: Boolean
+  antiVibrationGrommets: Boolean
+  builtInReceiver: String
+  ThreeVoltOutput: Boolean
+  FiveVoltOut: Boolean
+  CameraControl: Boolean
+}
+
+input FlightControllerUpdateWithWhereUniqueWithoutPostedByInput {
+  where: FlightControllerWhereUniqueInput!
+  data: FlightControllerUpdateWithoutPostedByDataInput!
+}
+
+input FlightControllerUpsertWithWhereUniqueWithoutPostedByInput {
+  where: FlightControllerWhereUniqueInput!
+  update: FlightControllerUpdateWithoutPostedByDataInput!
+  create: FlightControllerCreateWithoutPostedByInput!
+}
+
+input FlightControllerWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  releaseDate: DateTime
+  releaseDate_not: DateTime
+  releaseDate_in: [DateTime!]
+  releaseDate_not_in: [DateTime!]
+  releaseDate_lt: DateTime
+  releaseDate_lte: DateTime
+  releaseDate_gt: DateTime
+  releaseDate_gte: DateTime
+  uarts: Int
+  uarts_not: Int
+  uarts_in: [Int!]
+  uarts_not_in: [Int!]
+  uarts_lt: Int
+  uarts_lte: Int
+  uarts_gt: Int
+  uarts_gte: Int
+  GyroOne: Float
+  GyroOne_not: Float
+  GyroOne_in: [Float!]
+  GyroOne_not_in: [Float!]
+  GyroOne_lt: Float
+  GyroOne_lte: Float
+  GyroOne_gt: Float
+  GyroOne_gte: Float
+  GyroTwo: Float
+  GyroTwo_not: Float
+  GyroTwo_in: [Float!]
+  GyroTwo_not_in: [Float!]
+  GyroTwo_lt: Float
+  GyroTwo_lte: Float
+  GyroTwo_gt: Float
+  GyroTwo_gte: Float
+  weightInGrams: Float
+  weightInGrams_not: Float
+  weightInGrams_in: [Float!]
+  weightInGrams_not_in: [Float!]
+  weightInGrams_lt: Float
+  weightInGrams_lte: Float
+  weightInGrams_gt: Float
+  weightInGrams_gte: Float
+  cpu: String
+  cpu_not: String
+  cpu_in: [String!]
+  cpu_not_in: [String!]
+  cpu_lt: String
+  cpu_lte: String
+  cpu_gt: String
+  cpu_gte: String
+  cpu_contains: String
+  cpu_not_contains: String
+  cpu_starts_with: String
+  cpu_not_starts_with: String
+  cpu_ends_with: String
+  cpu_not_ends_with: String
+  dimensions: String
+  dimensions_not: String
+  dimensions_in: [String!]
+  dimensions_not_in: [String!]
+  dimensions_lt: String
+  dimensions_lte: String
+  dimensions_gt: String
+  dimensions_gte: String
+  dimensions_contains: String
+  dimensions_not_contains: String
+  dimensions_starts_with: String
+  dimensions_not_starts_with: String
+  dimensions_ends_with: String
+  dimensions_not_ends_with: String
+  holePattern: String
+  holePattern_not: String
+  holePattern_in: [String!]
+  holePattern_not_in: [String!]
+  holePattern_lt: String
+  holePattern_lte: String
+  holePattern_gt: String
+  holePattern_gte: String
+  holePattern_contains: String
+  holePattern_not_contains: String
+  holePattern_starts_with: String
+  holePattern_not_starts_with: String
+  holePattern_ends_with: String
+  holePattern_not_ends_with: String
+  voltageInputMin: Float
+  voltageInputMin_not: Float
+  voltageInputMin_in: [Float!]
+  voltageInputMin_not_in: [Float!]
+  voltageInputMin_lt: Float
+  voltageInputMin_lte: Float
+  voltageInputMin_gt: Float
+  voltageInputMin_gte: Float
+  voltageInputMax: Float
+  voltageInputMax_not: Float
+  voltageInputMax_in: [Float!]
+  voltageInputMax_not_in: [Float!]
+  voltageInputMax_lt: Float
+  voltageInputMax_lte: Float
+  voltageInputMax_gt: Float
+  voltageInputMax_gte: Float
+  osd: Boolean
+  osd_not: Boolean
+  accelerometer: Boolean
+  accelerometer_not: Boolean
+  barometer: Boolean
+  barometer_not: Boolean
+  spektrumPort: Boolean
+  spektrumPort_not: Boolean
+  usbInterface: Boolean
+  usbInterface_not: Boolean
+  LedWS2812Support: Boolean
+  LedWS2812Support_not: Boolean
+  RSSIPad: Boolean
+  RSSIPad_not: Boolean
+  currentSensor: Boolean
+  currentSensor_not: Boolean
+  beeperPad: Boolean
+  beeperPad_not: Boolean
+  beeperOnBoard: Boolean
+  beeperOnBoard_not: Boolean
+  antiVibrationGrommets: Boolean
+  antiVibrationGrommets_not: Boolean
+  builtInReceiver: String
+  builtInReceiver_not: String
+  builtInReceiver_in: [String!]
+  builtInReceiver_not_in: [String!]
+  builtInReceiver_lt: String
+  builtInReceiver_lte: String
+  builtInReceiver_gt: String
+  builtInReceiver_gte: String
+  builtInReceiver_contains: String
+  builtInReceiver_not_contains: String
+  builtInReceiver_starts_with: String
+  builtInReceiver_not_starts_with: String
+  builtInReceiver_ends_with: String
+  builtInReceiver_not_ends_with: String
+  postedBy: UserWhereInput
+  ThreeVoltOutput: Boolean
+  ThreeVoltOutput_not: Boolean
+  FiveVoltOut: Boolean
+  FiveVoltOut_not: Boolean
+  CameraControl: Boolean
+  CameraControl_not: Boolean
+  AND: [FlightControllerWhereInput!]
+  OR: [FlightControllerWhereInput!]
+  NOT: [FlightControllerWhereInput!]
+}
+
+input FlightControllerWhereUniqueInput {
+  id: ID
+}
 
 type Link {
   id: ID!
@@ -301,6 +1016,12 @@ input LinkWhereUniqueInput {
 scalar Long
 
 type Mutation {
+  createFlightController(data: FlightControllerCreateInput!): FlightController!
+  updateFlightController(data: FlightControllerUpdateInput!, where: FlightControllerWhereUniqueInput!): FlightController
+  updateManyFlightControllers(data: FlightControllerUpdateManyMutationInput!, where: FlightControllerWhereInput): BatchPayload!
+  upsertFlightController(where: FlightControllerWhereUniqueInput!, create: FlightControllerCreateInput!, update: FlightControllerUpdateInput!): FlightController!
+  deleteFlightController(where: FlightControllerWhereUniqueInput!): FlightController
+  deleteManyFlightControllers(where: FlightControllerWhereInput): BatchPayload!
   createLink(data: LinkCreateInput!): Link!
   updateLink(data: LinkUpdateInput!, where: LinkWhereUniqueInput!): Link
   updateManyLinks(data: LinkUpdateManyMutationInput!, where: LinkWhereInput): BatchPayload!
@@ -338,6 +1059,9 @@ type PageInfo {
 }
 
 type Query {
+  flightController(where: FlightControllerWhereUniqueInput!): FlightController
+  flightControllers(where: FlightControllerWhereInput, orderBy: FlightControllerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FlightController]!
+  flightControllersConnection(where: FlightControllerWhereInput, orderBy: FlightControllerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FlightControllerConnection!
   link(where: LinkWhereUniqueInput!): Link
   links(where: LinkWhereInput, orderBy: LinkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Link]!
   linksConnection(where: LinkWhereInput, orderBy: LinkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LinkConnection!
@@ -351,6 +1075,7 @@ type Query {
 }
 
 type Subscription {
+  flightController(where: FlightControllerSubscriptionWhereInput): FlightControllerSubscriptionPayload
   link(where: LinkSubscriptionWhereInput): LinkSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   vote(where: VoteSubscriptionWhereInput): VoteSubscriptionPayload
@@ -363,6 +1088,7 @@ type User {
   password: String!
   links(where: LinkWhereInput, orderBy: LinkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Link!]
   votes(where: VoteWhereInput, orderBy: VoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Vote!]
+  flightControllers(where: FlightControllerWhereInput, orderBy: FlightControllerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FlightController!]
 }
 
 type UserConnection {
@@ -378,6 +1104,12 @@ input UserCreateInput {
   password: String!
   links: LinkCreateManyWithoutPostedByInput
   votes: VoteCreateManyWithoutUserInput
+  flightControllers: FlightControllerCreateManyWithoutPostedByInput
+}
+
+input UserCreateOneWithoutFlightControllersInput {
+  create: UserCreateWithoutFlightControllersInput
+  connect: UserWhereUniqueInput
 }
 
 input UserCreateOneWithoutLinksInput {
@@ -390,12 +1122,22 @@ input UserCreateOneWithoutVotesInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreateWithoutFlightControllersInput {
+  id: ID
+  name: String!
+  email: String!
+  password: String!
+  links: LinkCreateManyWithoutPostedByInput
+  votes: VoteCreateManyWithoutUserInput
+}
+
 input UserCreateWithoutLinksInput {
   id: ID
   name: String!
   email: String!
   password: String!
   votes: VoteCreateManyWithoutUserInput
+  flightControllers: FlightControllerCreateManyWithoutPostedByInput
 }
 
 input UserCreateWithoutVotesInput {
@@ -404,6 +1146,7 @@ input UserCreateWithoutVotesInput {
   email: String!
   password: String!
   links: LinkCreateManyWithoutPostedByInput
+  flightControllers: FlightControllerCreateManyWithoutPostedByInput
 }
 
 type UserEdge {
@@ -453,12 +1196,20 @@ input UserUpdateInput {
   password: String
   links: LinkUpdateManyWithoutPostedByInput
   votes: VoteUpdateManyWithoutUserInput
+  flightControllers: FlightControllerUpdateManyWithoutPostedByInput
 }
 
 input UserUpdateManyMutationInput {
   name: String
   email: String
   password: String
+}
+
+input UserUpdateOneRequiredWithoutFlightControllersInput {
+  create: UserCreateWithoutFlightControllersInput
+  update: UserUpdateWithoutFlightControllersDataInput
+  upsert: UserUpsertWithoutFlightControllersInput
+  connect: UserWhereUniqueInput
 }
 
 input UserUpdateOneRequiredWithoutVotesInput {
@@ -477,11 +1228,20 @@ input UserUpdateOneWithoutLinksInput {
   connect: UserWhereUniqueInput
 }
 
+input UserUpdateWithoutFlightControllersDataInput {
+  name: String
+  email: String
+  password: String
+  links: LinkUpdateManyWithoutPostedByInput
+  votes: VoteUpdateManyWithoutUserInput
+}
+
 input UserUpdateWithoutLinksDataInput {
   name: String
   email: String
   password: String
   votes: VoteUpdateManyWithoutUserInput
+  flightControllers: FlightControllerUpdateManyWithoutPostedByInput
 }
 
 input UserUpdateWithoutVotesDataInput {
@@ -489,6 +1249,12 @@ input UserUpdateWithoutVotesDataInput {
   email: String
   password: String
   links: LinkUpdateManyWithoutPostedByInput
+  flightControllers: FlightControllerUpdateManyWithoutPostedByInput
+}
+
+input UserUpsertWithoutFlightControllersInput {
+  update: UserUpdateWithoutFlightControllersDataInput!
+  create: UserCreateWithoutFlightControllersInput!
 }
 
 input UserUpsertWithoutLinksInput {
@@ -564,6 +1330,9 @@ input UserWhereInput {
   votes_every: VoteWhereInput
   votes_some: VoteWhereInput
   votes_none: VoteWhereInput
+  flightControllers_every: FlightControllerWhereInput
+  flightControllers_some: FlightControllerWhereInput
+  flightControllers_none: FlightControllerWhereInput
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]

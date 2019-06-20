@@ -13,6 +13,7 @@ async function feed(parent, args, context, info) {
     orderBy: args.orderBy
   })
 
+
   const count = await context.prisma
     .linksConnection({
       where,
@@ -24,6 +25,26 @@ async function feed(parent, args, context, info) {
     links,
     count,
   }
+}
+
+async function flightControllerFeed(parent, args, context, info) {
+
+  const fcs = await context.prisma.flightControllers()
+
+  const count = await context.prisma
+    .flightControllersConnection()
+    .aggregate()
+    .count()
+
+  return {
+    flightControllers: fcs,
+    count
+  }
+}
+
+async function userList(parent, args, context, info){
+  let users = context.prisma.users()
+  return {users}
 }
 
 function info(){
@@ -43,4 +64,6 @@ function info(){
 module.exports = {
   feed,
   info,
+  flightControllerFeed,
+  userList
 }

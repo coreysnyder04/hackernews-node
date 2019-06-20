@@ -16,6 +16,7 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
+  flightController: (where?: FlightControllerWhereInput) => Promise<boolean>;
   link: (where?: LinkWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
   vote: (where?: VoteWhereInput) => Promise<boolean>;
@@ -40,6 +41,27 @@ export interface Prisma {
    * Queries
    */
 
+  flightController: (
+    where: FlightControllerWhereUniqueInput
+  ) => FlightControllerNullablePromise;
+  flightControllers: (args?: {
+    where?: FlightControllerWhereInput;
+    orderBy?: FlightControllerOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<FlightController>;
+  flightControllersConnection: (args?: {
+    where?: FlightControllerWhereInput;
+    orderBy?: FlightControllerOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FlightControllerConnectionPromise;
   link: (where: LinkWhereUniqueInput) => LinkNullablePromise;
   links: (args?: {
     where?: LinkWhereInput;
@@ -103,6 +125,28 @@ export interface Prisma {
    * Mutations
    */
 
+  createFlightController: (
+    data: FlightControllerCreateInput
+  ) => FlightControllerPromise;
+  updateFlightController: (args: {
+    data: FlightControllerUpdateInput;
+    where: FlightControllerWhereUniqueInput;
+  }) => FlightControllerPromise;
+  updateManyFlightControllers: (args: {
+    data: FlightControllerUpdateManyMutationInput;
+    where?: FlightControllerWhereInput;
+  }) => BatchPayloadPromise;
+  upsertFlightController: (args: {
+    where: FlightControllerWhereUniqueInput;
+    create: FlightControllerCreateInput;
+    update: FlightControllerUpdateInput;
+  }) => FlightControllerPromise;
+  deleteFlightController: (
+    where: FlightControllerWhereUniqueInput
+  ) => FlightControllerPromise;
+  deleteManyFlightControllers: (
+    where?: FlightControllerWhereInput
+  ) => BatchPayloadPromise;
   createLink: (data: LinkCreateInput) => LinkPromise;
   updateLink: (args: {
     data: LinkUpdateInput;
@@ -156,6 +200,9 @@ export interface Prisma {
 }
 
 export interface Subscription {
+  flightController: (
+    where?: FlightControllerSubscriptionWhereInput
+  ) => FlightControllerSubscriptionPayloadSubscription;
   link: (
     where?: LinkSubscriptionWhereInput
   ) => LinkSubscriptionPayloadSubscription;
@@ -187,6 +234,62 @@ export type LinkOrderByInput =
 
 export type VoteOrderByInput = "id_ASC" | "id_DESC";
 
+export type FlightControllerOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "releaseDate_ASC"
+  | "releaseDate_DESC"
+  | "uarts_ASC"
+  | "uarts_DESC"
+  | "GyroOne_ASC"
+  | "GyroOne_DESC"
+  | "GyroTwo_ASC"
+  | "GyroTwo_DESC"
+  | "weightInGrams_ASC"
+  | "weightInGrams_DESC"
+  | "cpu_ASC"
+  | "cpu_DESC"
+  | "dimensions_ASC"
+  | "dimensions_DESC"
+  | "holePattern_ASC"
+  | "holePattern_DESC"
+  | "voltageInputMin_ASC"
+  | "voltageInputMin_DESC"
+  | "voltageInputMax_ASC"
+  | "voltageInputMax_DESC"
+  | "osd_ASC"
+  | "osd_DESC"
+  | "accelerometer_ASC"
+  | "accelerometer_DESC"
+  | "barometer_ASC"
+  | "barometer_DESC"
+  | "spektrumPort_ASC"
+  | "spektrumPort_DESC"
+  | "usbInterface_ASC"
+  | "usbInterface_DESC"
+  | "LedWS2812Support_ASC"
+  | "LedWS2812Support_DESC"
+  | "RSSIPad_ASC"
+  | "RSSIPad_DESC"
+  | "currentSensor_ASC"
+  | "currentSensor_DESC"
+  | "beeperPad_ASC"
+  | "beeperPad_DESC"
+  | "beeperOnBoard_ASC"
+  | "beeperOnBoard_DESC"
+  | "antiVibrationGrommets_ASC"
+  | "antiVibrationGrommets_DESC"
+  | "builtInReceiver_ASC"
+  | "builtInReceiver_DESC"
+  | "ThreeVoltOutput_ASC"
+  | "ThreeVoltOutput_DESC"
+  | "FiveVoltOut_ASC"
+  | "FiveVoltOut_DESC"
+  | "CameraControl_ASC"
+  | "CameraControl_DESC";
+
 export type UserOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -199,147 +302,31 @@ export type UserOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface UserUpdateOneWithoutLinksInput {
-  create?: Maybe<UserCreateWithoutLinksInput>;
-  update?: Maybe<UserUpdateWithoutLinksDataInput>;
-  upsert?: Maybe<UserUpsertWithoutLinksInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<UserWhereUniqueInput>;
+export interface LinkUpdateManyWithoutPostedByInput {
+  create?: Maybe<
+    LinkCreateWithoutPostedByInput[] | LinkCreateWithoutPostedByInput
+  >;
+  delete?: Maybe<LinkWhereUniqueInput[] | LinkWhereUniqueInput>;
+  connect?: Maybe<LinkWhereUniqueInput[] | LinkWhereUniqueInput>;
+  set?: Maybe<LinkWhereUniqueInput[] | LinkWhereUniqueInput>;
+  disconnect?: Maybe<LinkWhereUniqueInput[] | LinkWhereUniqueInput>;
+  update?: Maybe<
+    | LinkUpdateWithWhereUniqueWithoutPostedByInput[]
+    | LinkUpdateWithWhereUniqueWithoutPostedByInput
+  >;
+  upsert?: Maybe<
+    | LinkUpsertWithWhereUniqueWithoutPostedByInput[]
+    | LinkUpsertWithWhereUniqueWithoutPostedByInput
+  >;
+  deleteMany?: Maybe<LinkScalarWhereInput[] | LinkScalarWhereInput>;
+  updateMany?: Maybe<
+    LinkUpdateManyWithWhereNestedInput[] | LinkUpdateManyWithWhereNestedInput
+  >;
 }
 
-export type LinkWhereUniqueInput = AtLeastOne<{
+export type FlightControllerWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
-
-export interface VoteUpdateWithWhereUniqueWithoutUserInput {
-  where: VoteWhereUniqueInput;
-  data: VoteUpdateWithoutUserDataInput;
-}
-
-export interface LinkWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  description?: Maybe<String>;
-  description_not?: Maybe<String>;
-  description_in?: Maybe<String[] | String>;
-  description_not_in?: Maybe<String[] | String>;
-  description_lt?: Maybe<String>;
-  description_lte?: Maybe<String>;
-  description_gt?: Maybe<String>;
-  description_gte?: Maybe<String>;
-  description_contains?: Maybe<String>;
-  description_not_contains?: Maybe<String>;
-  description_starts_with?: Maybe<String>;
-  description_not_starts_with?: Maybe<String>;
-  description_ends_with?: Maybe<String>;
-  description_not_ends_with?: Maybe<String>;
-  url?: Maybe<String>;
-  url_not?: Maybe<String>;
-  url_in?: Maybe<String[] | String>;
-  url_not_in?: Maybe<String[] | String>;
-  url_lt?: Maybe<String>;
-  url_lte?: Maybe<String>;
-  url_gt?: Maybe<String>;
-  url_gte?: Maybe<String>;
-  url_contains?: Maybe<String>;
-  url_not_contains?: Maybe<String>;
-  url_starts_with?: Maybe<String>;
-  url_not_starts_with?: Maybe<String>;
-  url_ends_with?: Maybe<String>;
-  url_not_ends_with?: Maybe<String>;
-  postedBy?: Maybe<UserWhereInput>;
-  votes_every?: Maybe<VoteWhereInput>;
-  votes_some?: Maybe<VoteWhereInput>;
-  votes_none?: Maybe<VoteWhereInput>;
-  AND?: Maybe<LinkWhereInput[] | LinkWhereInput>;
-  OR?: Maybe<LinkWhereInput[] | LinkWhereInput>;
-  NOT?: Maybe<LinkWhereInput[] | LinkWhereInput>;
-}
-
-export interface VoteUpdateWithoutUserDataInput {
-  link?: Maybe<LinkUpdateOneRequiredWithoutVotesInput>;
-}
-
-export interface VoteWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  link?: Maybe<LinkWhereInput>;
-  user?: Maybe<UserWhereInput>;
-  AND?: Maybe<VoteWhereInput[] | VoteWhereInput>;
-  OR?: Maybe<VoteWhereInput[] | VoteWhereInput>;
-  NOT?: Maybe<VoteWhereInput[] | VoteWhereInput>;
-}
-
-export interface VoteCreateManyWithoutLinkInput {
-  create?: Maybe<VoteCreateWithoutLinkInput[] | VoteCreateWithoutLinkInput>;
-  connect?: Maybe<VoteWhereUniqueInput[] | VoteWhereUniqueInput>;
-}
-
-export interface LinkUpdateWithWhereUniqueWithoutPostedByInput {
-  where: LinkWhereUniqueInput;
-  data: LinkUpdateWithoutPostedByDataInput;
-}
-
-export interface VoteCreateWithoutLinkInput {
-  id?: Maybe<ID_Input>;
-  user: UserCreateOneWithoutVotesInput;
-}
-
-export interface LinkUpdateOneRequiredWithoutVotesInput {
-  create?: Maybe<LinkCreateWithoutVotesInput>;
-  update?: Maybe<LinkUpdateWithoutVotesDataInput>;
-  upsert?: Maybe<LinkUpsertWithoutVotesInput>;
-  connect?: Maybe<LinkWhereUniqueInput>;
-}
-
-export interface UserCreateOneWithoutVotesInput {
-  create?: Maybe<UserCreateWithoutVotesInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface UserSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<UserWhereInput>;
-  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-}
 
 export interface UserCreateWithoutVotesInput {
   id?: Maybe<ID_Input>;
@@ -347,145 +334,56 @@ export interface UserCreateWithoutVotesInput {
   email: String;
   password: String;
   links?: Maybe<LinkCreateManyWithoutPostedByInput>;
+  flightControllers?: Maybe<FlightControllerCreateManyWithoutPostedByInput>;
 }
 
-export interface VoteUpdateInput {
+export interface VoteUpdateWithoutUserDataInput {
   link?: Maybe<LinkUpdateOneRequiredWithoutVotesInput>;
-  user?: Maybe<UserUpdateOneRequiredWithoutVotesInput>;
 }
 
-export interface LinkCreateManyWithoutPostedByInput {
+export interface FlightControllerCreateManyWithoutPostedByInput {
   create?: Maybe<
-    LinkCreateWithoutPostedByInput[] | LinkCreateWithoutPostedByInput
+    | FlightControllerCreateWithoutPostedByInput[]
+    | FlightControllerCreateWithoutPostedByInput
   >;
-  connect?: Maybe<LinkWhereUniqueInput[] | LinkWhereUniqueInput>;
+  connect?: Maybe<
+    FlightControllerWhereUniqueInput[] | FlightControllerWhereUniqueInput
+  >;
 }
 
-export interface UserUpdateManyMutationInput {
-  name?: Maybe<String>;
-  email?: Maybe<String>;
-  password?: Maybe<String>;
+export interface VoteUpdateWithWhereUniqueWithoutLinkInput {
+  where: VoteWhereUniqueInput;
+  data: VoteUpdateWithoutLinkDataInput;
 }
 
-export interface LinkCreateWithoutPostedByInput {
+export interface FlightControllerCreateWithoutPostedByInput {
   id?: Maybe<ID_Input>;
-  description: String;
-  url: String;
-  votes?: Maybe<VoteCreateManyWithoutLinkInput>;
-}
-
-export interface UserUpdateInput {
-  name?: Maybe<String>;
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-  links?: Maybe<LinkUpdateManyWithoutPostedByInput>;
-  votes?: Maybe<VoteUpdateManyWithoutUserInput>;
-}
-
-export interface LinkUpdateInput {
-  description?: Maybe<String>;
-  url?: Maybe<String>;
-  postedBy?: Maybe<UserUpdateOneWithoutLinksInput>;
-  votes?: Maybe<VoteUpdateManyWithoutLinkInput>;
-}
-
-export interface LinkUpdateManyMutationInput {
-  description?: Maybe<String>;
-  url?: Maybe<String>;
-}
-
-export interface LinkScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  description?: Maybe<String>;
-  description_not?: Maybe<String>;
-  description_in?: Maybe<String[] | String>;
-  description_not_in?: Maybe<String[] | String>;
-  description_lt?: Maybe<String>;
-  description_lte?: Maybe<String>;
-  description_gt?: Maybe<String>;
-  description_gte?: Maybe<String>;
-  description_contains?: Maybe<String>;
-  description_not_contains?: Maybe<String>;
-  description_starts_with?: Maybe<String>;
-  description_not_starts_with?: Maybe<String>;
-  description_ends_with?: Maybe<String>;
-  description_not_ends_with?: Maybe<String>;
-  url?: Maybe<String>;
-  url_not?: Maybe<String>;
-  url_in?: Maybe<String[] | String>;
-  url_not_in?: Maybe<String[] | String>;
-  url_lt?: Maybe<String>;
-  url_lte?: Maybe<String>;
-  url_gt?: Maybe<String>;
-  url_gte?: Maybe<String>;
-  url_contains?: Maybe<String>;
-  url_not_contains?: Maybe<String>;
-  url_starts_with?: Maybe<String>;
-  url_not_starts_with?: Maybe<String>;
-  url_ends_with?: Maybe<String>;
-  url_not_ends_with?: Maybe<String>;
-  AND?: Maybe<LinkScalarWhereInput[] | LinkScalarWhereInput>;
-  OR?: Maybe<LinkScalarWhereInput[] | LinkScalarWhereInput>;
-  NOT?: Maybe<LinkScalarWhereInput[] | LinkScalarWhereInput>;
-}
-
-export type VoteWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface UserUpdateWithoutLinksDataInput {
-  name?: Maybe<String>;
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-  votes?: Maybe<VoteUpdateManyWithoutUserInput>;
-}
-
-export interface LinkUpdateManyDataInput {
-  description?: Maybe<String>;
-  url?: Maybe<String>;
-}
-
-export interface VoteUpdateManyWithoutUserInput {
-  create?: Maybe<VoteCreateWithoutUserInput[] | VoteCreateWithoutUserInput>;
-  delete?: Maybe<VoteWhereUniqueInput[] | VoteWhereUniqueInput>;
-  connect?: Maybe<VoteWhereUniqueInput[] | VoteWhereUniqueInput>;
-  set?: Maybe<VoteWhereUniqueInput[] | VoteWhereUniqueInput>;
-  disconnect?: Maybe<VoteWhereUniqueInput[] | VoteWhereUniqueInput>;
-  update?: Maybe<
-    | VoteUpdateWithWhereUniqueWithoutUserInput[]
-    | VoteUpdateWithWhereUniqueWithoutUserInput
-  >;
-  upsert?: Maybe<
-    | VoteUpsertWithWhereUniqueWithoutUserInput[]
-    | VoteUpsertWithWhereUniqueWithoutUserInput
-  >;
-  deleteMany?: Maybe<VoteScalarWhereInput[] | VoteScalarWhereInput>;
-}
-
-export interface UserCreateOneWithoutLinksInput {
-  create?: Maybe<UserCreateWithoutLinksInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
+  name: String;
+  releaseDate: DateTimeInput;
+  uarts: Int;
+  GyroOne?: Maybe<Float>;
+  GyroTwo?: Maybe<Float>;
+  weightInGrams?: Maybe<Float>;
+  cpu: String;
+  dimensions?: Maybe<String>;
+  holePattern: String;
+  voltageInputMin: Float;
+  voltageInputMax: Float;
+  osd: Boolean;
+  accelerometer: Boolean;
+  barometer: Boolean;
+  spektrumPort: Boolean;
+  usbInterface: Boolean;
+  LedWS2812Support: Boolean;
+  RSSIPad: Boolean;
+  currentSensor: Boolean;
+  beeperPad: Boolean;
+  beeperOnBoard: Boolean;
+  antiVibrationGrommets: Boolean;
+  builtInReceiver?: Maybe<String>;
+  ThreeVoltOutput?: Maybe<Boolean>;
+  FiveVoltOut?: Maybe<Boolean>;
+  CameraControl?: Maybe<Boolean>;
 }
 
 export interface UserWhereInput {
@@ -551,6 +449,9 @@ export interface UserWhereInput {
   votes_every?: Maybe<VoteWhereInput>;
   votes_some?: Maybe<VoteWhereInput>;
   votes_none?: Maybe<VoteWhereInput>;
+  flightControllers_every?: Maybe<FlightControllerWhereInput>;
+  flightControllers_some?: Maybe<FlightControllerWhereInput>;
+  flightControllers_none?: Maybe<FlightControllerWhereInput>;
   AND?: Maybe<UserWhereInput[] | UserWhereInput>;
   OR?: Maybe<UserWhereInput[] | UserWhereInput>;
   NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
@@ -561,10 +462,195 @@ export interface VoteCreateManyWithoutUserInput {
   connect?: Maybe<VoteWhereUniqueInput[] | VoteWhereUniqueInput>;
 }
 
-export interface LinkUpsertWithWhereUniqueWithoutPostedByInput {
-  where: LinkWhereUniqueInput;
-  update: LinkUpdateWithoutPostedByDataInput;
-  create: LinkCreateWithoutPostedByInput;
+export interface FlightControllerWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  releaseDate?: Maybe<DateTimeInput>;
+  releaseDate_not?: Maybe<DateTimeInput>;
+  releaseDate_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  releaseDate_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  releaseDate_lt?: Maybe<DateTimeInput>;
+  releaseDate_lte?: Maybe<DateTimeInput>;
+  releaseDate_gt?: Maybe<DateTimeInput>;
+  releaseDate_gte?: Maybe<DateTimeInput>;
+  uarts?: Maybe<Int>;
+  uarts_not?: Maybe<Int>;
+  uarts_in?: Maybe<Int[] | Int>;
+  uarts_not_in?: Maybe<Int[] | Int>;
+  uarts_lt?: Maybe<Int>;
+  uarts_lte?: Maybe<Int>;
+  uarts_gt?: Maybe<Int>;
+  uarts_gte?: Maybe<Int>;
+  GyroOne?: Maybe<Float>;
+  GyroOne_not?: Maybe<Float>;
+  GyroOne_in?: Maybe<Float[] | Float>;
+  GyroOne_not_in?: Maybe<Float[] | Float>;
+  GyroOne_lt?: Maybe<Float>;
+  GyroOne_lte?: Maybe<Float>;
+  GyroOne_gt?: Maybe<Float>;
+  GyroOne_gte?: Maybe<Float>;
+  GyroTwo?: Maybe<Float>;
+  GyroTwo_not?: Maybe<Float>;
+  GyroTwo_in?: Maybe<Float[] | Float>;
+  GyroTwo_not_in?: Maybe<Float[] | Float>;
+  GyroTwo_lt?: Maybe<Float>;
+  GyroTwo_lte?: Maybe<Float>;
+  GyroTwo_gt?: Maybe<Float>;
+  GyroTwo_gte?: Maybe<Float>;
+  weightInGrams?: Maybe<Float>;
+  weightInGrams_not?: Maybe<Float>;
+  weightInGrams_in?: Maybe<Float[] | Float>;
+  weightInGrams_not_in?: Maybe<Float[] | Float>;
+  weightInGrams_lt?: Maybe<Float>;
+  weightInGrams_lte?: Maybe<Float>;
+  weightInGrams_gt?: Maybe<Float>;
+  weightInGrams_gte?: Maybe<Float>;
+  cpu?: Maybe<String>;
+  cpu_not?: Maybe<String>;
+  cpu_in?: Maybe<String[] | String>;
+  cpu_not_in?: Maybe<String[] | String>;
+  cpu_lt?: Maybe<String>;
+  cpu_lte?: Maybe<String>;
+  cpu_gt?: Maybe<String>;
+  cpu_gte?: Maybe<String>;
+  cpu_contains?: Maybe<String>;
+  cpu_not_contains?: Maybe<String>;
+  cpu_starts_with?: Maybe<String>;
+  cpu_not_starts_with?: Maybe<String>;
+  cpu_ends_with?: Maybe<String>;
+  cpu_not_ends_with?: Maybe<String>;
+  dimensions?: Maybe<String>;
+  dimensions_not?: Maybe<String>;
+  dimensions_in?: Maybe<String[] | String>;
+  dimensions_not_in?: Maybe<String[] | String>;
+  dimensions_lt?: Maybe<String>;
+  dimensions_lte?: Maybe<String>;
+  dimensions_gt?: Maybe<String>;
+  dimensions_gte?: Maybe<String>;
+  dimensions_contains?: Maybe<String>;
+  dimensions_not_contains?: Maybe<String>;
+  dimensions_starts_with?: Maybe<String>;
+  dimensions_not_starts_with?: Maybe<String>;
+  dimensions_ends_with?: Maybe<String>;
+  dimensions_not_ends_with?: Maybe<String>;
+  holePattern?: Maybe<String>;
+  holePattern_not?: Maybe<String>;
+  holePattern_in?: Maybe<String[] | String>;
+  holePattern_not_in?: Maybe<String[] | String>;
+  holePattern_lt?: Maybe<String>;
+  holePattern_lte?: Maybe<String>;
+  holePattern_gt?: Maybe<String>;
+  holePattern_gte?: Maybe<String>;
+  holePattern_contains?: Maybe<String>;
+  holePattern_not_contains?: Maybe<String>;
+  holePattern_starts_with?: Maybe<String>;
+  holePattern_not_starts_with?: Maybe<String>;
+  holePattern_ends_with?: Maybe<String>;
+  holePattern_not_ends_with?: Maybe<String>;
+  voltageInputMin?: Maybe<Float>;
+  voltageInputMin_not?: Maybe<Float>;
+  voltageInputMin_in?: Maybe<Float[] | Float>;
+  voltageInputMin_not_in?: Maybe<Float[] | Float>;
+  voltageInputMin_lt?: Maybe<Float>;
+  voltageInputMin_lte?: Maybe<Float>;
+  voltageInputMin_gt?: Maybe<Float>;
+  voltageInputMin_gte?: Maybe<Float>;
+  voltageInputMax?: Maybe<Float>;
+  voltageInputMax_not?: Maybe<Float>;
+  voltageInputMax_in?: Maybe<Float[] | Float>;
+  voltageInputMax_not_in?: Maybe<Float[] | Float>;
+  voltageInputMax_lt?: Maybe<Float>;
+  voltageInputMax_lte?: Maybe<Float>;
+  voltageInputMax_gt?: Maybe<Float>;
+  voltageInputMax_gte?: Maybe<Float>;
+  osd?: Maybe<Boolean>;
+  osd_not?: Maybe<Boolean>;
+  accelerometer?: Maybe<Boolean>;
+  accelerometer_not?: Maybe<Boolean>;
+  barometer?: Maybe<Boolean>;
+  barometer_not?: Maybe<Boolean>;
+  spektrumPort?: Maybe<Boolean>;
+  spektrumPort_not?: Maybe<Boolean>;
+  usbInterface?: Maybe<Boolean>;
+  usbInterface_not?: Maybe<Boolean>;
+  LedWS2812Support?: Maybe<Boolean>;
+  LedWS2812Support_not?: Maybe<Boolean>;
+  RSSIPad?: Maybe<Boolean>;
+  RSSIPad_not?: Maybe<Boolean>;
+  currentSensor?: Maybe<Boolean>;
+  currentSensor_not?: Maybe<Boolean>;
+  beeperPad?: Maybe<Boolean>;
+  beeperPad_not?: Maybe<Boolean>;
+  beeperOnBoard?: Maybe<Boolean>;
+  beeperOnBoard_not?: Maybe<Boolean>;
+  antiVibrationGrommets?: Maybe<Boolean>;
+  antiVibrationGrommets_not?: Maybe<Boolean>;
+  builtInReceiver?: Maybe<String>;
+  builtInReceiver_not?: Maybe<String>;
+  builtInReceiver_in?: Maybe<String[] | String>;
+  builtInReceiver_not_in?: Maybe<String[] | String>;
+  builtInReceiver_lt?: Maybe<String>;
+  builtInReceiver_lte?: Maybe<String>;
+  builtInReceiver_gt?: Maybe<String>;
+  builtInReceiver_gte?: Maybe<String>;
+  builtInReceiver_contains?: Maybe<String>;
+  builtInReceiver_not_contains?: Maybe<String>;
+  builtInReceiver_starts_with?: Maybe<String>;
+  builtInReceiver_not_starts_with?: Maybe<String>;
+  builtInReceiver_ends_with?: Maybe<String>;
+  builtInReceiver_not_ends_with?: Maybe<String>;
+  postedBy?: Maybe<UserWhereInput>;
+  ThreeVoltOutput?: Maybe<Boolean>;
+  ThreeVoltOutput_not?: Maybe<Boolean>;
+  FiveVoltOut?: Maybe<Boolean>;
+  FiveVoltOut_not?: Maybe<Boolean>;
+  CameraControl?: Maybe<Boolean>;
+  CameraControl_not?: Maybe<Boolean>;
+  AND?: Maybe<FlightControllerWhereInput[] | FlightControllerWhereInput>;
+  OR?: Maybe<FlightControllerWhereInput[] | FlightControllerWhereInput>;
+  NOT?: Maybe<FlightControllerWhereInput[] | FlightControllerWhereInput>;
+}
+
+export interface VoteCreateWithoutUserInput {
+  id?: Maybe<ID_Input>;
+  link: LinkCreateOneWithoutVotesInput;
+}
+
+export interface UserSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<UserWhereInput>;
+  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
 }
 
 export interface LinkCreateOneWithoutVotesInput {
@@ -572,10 +658,351 @@ export interface LinkCreateOneWithoutVotesInput {
   connect?: Maybe<LinkWhereUniqueInput>;
 }
 
+export interface FlightControllerSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<FlightControllerWhereInput>;
+  AND?: Maybe<
+    | FlightControllerSubscriptionWhereInput[]
+    | FlightControllerSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    | FlightControllerSubscriptionWhereInput[]
+    | FlightControllerSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    | FlightControllerSubscriptionWhereInput[]
+    | FlightControllerSubscriptionWhereInput
+  >;
+}
+
+export interface LinkCreateWithoutVotesInput {
+  id?: Maybe<ID_Input>;
+  description: String;
+  url: String;
+  postedBy?: Maybe<UserCreateOneWithoutLinksInput>;
+}
+
+export interface VoteCreateInput {
+  id?: Maybe<ID_Input>;
+  link: LinkCreateOneWithoutVotesInput;
+  user: UserCreateOneWithoutVotesInput;
+}
+
+export interface UserCreateOneWithoutLinksInput {
+  create?: Maybe<UserCreateWithoutLinksInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserUpdateInput {
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+  links?: Maybe<LinkUpdateManyWithoutPostedByInput>;
+  votes?: Maybe<VoteUpdateManyWithoutUserInput>;
+  flightControllers?: Maybe<FlightControllerUpdateManyWithoutPostedByInput>;
+}
+
+export interface UserCreateWithoutLinksInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  email: String;
+  password: String;
+  votes?: Maybe<VoteCreateManyWithoutUserInput>;
+  flightControllers?: Maybe<FlightControllerCreateManyWithoutPostedByInput>;
+}
+
+export type LinkWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface FlightControllerUpdateInput {
+  name?: Maybe<String>;
+  releaseDate?: Maybe<DateTimeInput>;
+  uarts?: Maybe<Int>;
+  GyroOne?: Maybe<Float>;
+  GyroTwo?: Maybe<Float>;
+  weightInGrams?: Maybe<Float>;
+  cpu?: Maybe<String>;
+  dimensions?: Maybe<String>;
+  holePattern?: Maybe<String>;
+  voltageInputMin?: Maybe<Float>;
+  voltageInputMax?: Maybe<Float>;
+  osd?: Maybe<Boolean>;
+  accelerometer?: Maybe<Boolean>;
+  barometer?: Maybe<Boolean>;
+  spektrumPort?: Maybe<Boolean>;
+  usbInterface?: Maybe<Boolean>;
+  LedWS2812Support?: Maybe<Boolean>;
+  RSSIPad?: Maybe<Boolean>;
+  currentSensor?: Maybe<Boolean>;
+  beeperPad?: Maybe<Boolean>;
+  beeperOnBoard?: Maybe<Boolean>;
+  antiVibrationGrommets?: Maybe<Boolean>;
+  builtInReceiver?: Maybe<String>;
+  postedBy?: Maybe<UserUpdateOneRequiredWithoutFlightControllersInput>;
+  ThreeVoltOutput?: Maybe<Boolean>;
+  FiveVoltOut?: Maybe<Boolean>;
+  CameraControl?: Maybe<Boolean>;
+}
+
+export interface LinkUpdateInput {
+  description?: Maybe<String>;
+  url?: Maybe<String>;
+  postedBy?: Maybe<UserUpdateOneWithoutLinksInput>;
+  votes?: Maybe<VoteUpdateManyWithoutLinkInput>;
+}
+
+export interface UserUpdateOneRequiredWithoutFlightControllersInput {
+  create?: Maybe<UserCreateWithoutFlightControllersInput>;
+  update?: Maybe<UserUpdateWithoutFlightControllersDataInput>;
+  upsert?: Maybe<UserUpsertWithoutFlightControllersInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  email?: Maybe<String>;
+}>;
+
+export interface UserUpdateWithoutFlightControllersDataInput {
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+  links?: Maybe<LinkUpdateManyWithoutPostedByInput>;
+  votes?: Maybe<VoteUpdateManyWithoutUserInput>;
+}
+
+export interface UserUpsertWithoutFlightControllersInput {
+  update: UserUpdateWithoutFlightControllersDataInput;
+  create: UserCreateWithoutFlightControllersInput;
+}
+
+export interface LinkUpdateWithoutVotesDataInput {
+  description?: Maybe<String>;
+  url?: Maybe<String>;
+  postedBy?: Maybe<UserUpdateOneWithoutLinksInput>;
+}
+
+export interface LinkUpsertWithoutVotesInput {
+  update: LinkUpdateWithoutVotesDataInput;
+  create: LinkCreateWithoutVotesInput;
+}
+
+export interface LinkUpdateWithWhereUniqueWithoutPostedByInput {
+  where: LinkWhereUniqueInput;
+  data: LinkUpdateWithoutPostedByDataInput;
+}
+
+export interface UserUpsertWithoutLinksInput {
+  update: UserUpdateWithoutLinksDataInput;
+  create: UserCreateWithoutLinksInput;
+}
+
 export interface LinkUpdateWithoutPostedByDataInput {
   description?: Maybe<String>;
   url?: Maybe<String>;
   votes?: Maybe<VoteUpdateManyWithoutLinkInput>;
+}
+
+export interface UserUpdateOneWithoutLinksInput {
+  create?: Maybe<UserCreateWithoutLinksInput>;
+  update?: Maybe<UserUpdateWithoutLinksDataInput>;
+  upsert?: Maybe<UserUpsertWithoutLinksInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface VoteUpdateManyWithoutLinkInput {
+  create?: Maybe<VoteCreateWithoutLinkInput[] | VoteCreateWithoutLinkInput>;
+  delete?: Maybe<VoteWhereUniqueInput[] | VoteWhereUniqueInput>;
+  connect?: Maybe<VoteWhereUniqueInput[] | VoteWhereUniqueInput>;
+  set?: Maybe<VoteWhereUniqueInput[] | VoteWhereUniqueInput>;
+  disconnect?: Maybe<VoteWhereUniqueInput[] | VoteWhereUniqueInput>;
+  update?: Maybe<
+    | VoteUpdateWithWhereUniqueWithoutLinkInput[]
+    | VoteUpdateWithWhereUniqueWithoutLinkInput
+  >;
+  upsert?: Maybe<
+    | VoteUpsertWithWhereUniqueWithoutLinkInput[]
+    | VoteUpsertWithWhereUniqueWithoutLinkInput
+  >;
+  deleteMany?: Maybe<VoteScalarWhereInput[] | VoteScalarWhereInput>;
+}
+
+export interface FlightControllerCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  releaseDate: DateTimeInput;
+  uarts: Int;
+  GyroOne?: Maybe<Float>;
+  GyroTwo?: Maybe<Float>;
+  weightInGrams?: Maybe<Float>;
+  cpu: String;
+  dimensions?: Maybe<String>;
+  holePattern: String;
+  voltageInputMin: Float;
+  voltageInputMax: Float;
+  osd: Boolean;
+  accelerometer: Boolean;
+  barometer: Boolean;
+  spektrumPort: Boolean;
+  usbInterface: Boolean;
+  LedWS2812Support: Boolean;
+  RSSIPad: Boolean;
+  currentSensor: Boolean;
+  beeperPad: Boolean;
+  beeperOnBoard: Boolean;
+  antiVibrationGrommets: Boolean;
+  builtInReceiver?: Maybe<String>;
+  postedBy: UserCreateOneWithoutFlightControllersInput;
+  ThreeVoltOutput?: Maybe<Boolean>;
+  FiveVoltOut?: Maybe<Boolean>;
+  CameraControl?: Maybe<Boolean>;
+}
+
+export interface LinkUpdateOneRequiredWithoutVotesInput {
+  create?: Maybe<LinkCreateWithoutVotesInput>;
+  update?: Maybe<LinkUpdateWithoutVotesDataInput>;
+  upsert?: Maybe<LinkUpsertWithoutVotesInput>;
+  connect?: Maybe<LinkWhereUniqueInput>;
+}
+
+export interface UserCreateWithoutFlightControllersInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  email: String;
+  password: String;
+  links?: Maybe<LinkCreateManyWithoutPostedByInput>;
+  votes?: Maybe<VoteCreateManyWithoutUserInput>;
+}
+
+export interface VoteUpdateWithoutLinkDataInput {
+  user?: Maybe<UserUpdateOneRequiredWithoutVotesInput>;
+}
+
+export interface LinkCreateWithoutPostedByInput {
+  id?: Maybe<ID_Input>;
+  description: String;
+  url: String;
+  votes?: Maybe<VoteCreateManyWithoutLinkInput>;
+}
+
+export interface UserUpdateOneRequiredWithoutVotesInput {
+  create?: Maybe<UserCreateWithoutVotesInput>;
+  update?: Maybe<UserUpdateWithoutVotesDataInput>;
+  upsert?: Maybe<UserUpsertWithoutVotesInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface VoteCreateWithoutLinkInput {
+  id?: Maybe<ID_Input>;
+  user: UserCreateOneWithoutVotesInput;
+}
+
+export interface UserUpdateWithoutVotesDataInput {
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+  links?: Maybe<LinkUpdateManyWithoutPostedByInput>;
+  flightControllers?: Maybe<FlightControllerUpdateManyWithoutPostedByInput>;
+}
+
+export interface LinkWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  description?: Maybe<String>;
+  description_not?: Maybe<String>;
+  description_in?: Maybe<String[] | String>;
+  description_not_in?: Maybe<String[] | String>;
+  description_lt?: Maybe<String>;
+  description_lte?: Maybe<String>;
+  description_gt?: Maybe<String>;
+  description_gte?: Maybe<String>;
+  description_contains?: Maybe<String>;
+  description_not_contains?: Maybe<String>;
+  description_starts_with?: Maybe<String>;
+  description_not_starts_with?: Maybe<String>;
+  description_ends_with?: Maybe<String>;
+  description_not_ends_with?: Maybe<String>;
+  url?: Maybe<String>;
+  url_not?: Maybe<String>;
+  url_in?: Maybe<String[] | String>;
+  url_not_in?: Maybe<String[] | String>;
+  url_lt?: Maybe<String>;
+  url_lte?: Maybe<String>;
+  url_gt?: Maybe<String>;
+  url_gte?: Maybe<String>;
+  url_contains?: Maybe<String>;
+  url_not_contains?: Maybe<String>;
+  url_starts_with?: Maybe<String>;
+  url_not_starts_with?: Maybe<String>;
+  url_ends_with?: Maybe<String>;
+  url_not_ends_with?: Maybe<String>;
+  postedBy?: Maybe<UserWhereInput>;
+  votes_every?: Maybe<VoteWhereInput>;
+  votes_some?: Maybe<VoteWhereInput>;
+  votes_none?: Maybe<VoteWhereInput>;
+  AND?: Maybe<LinkWhereInput[] | LinkWhereInput>;
+  OR?: Maybe<LinkWhereInput[] | LinkWhereInput>;
+  NOT?: Maybe<LinkWhereInput[] | LinkWhereInput>;
+}
+
+export interface FlightControllerUpdateManyWithoutPostedByInput {
+  create?: Maybe<
+    | FlightControllerCreateWithoutPostedByInput[]
+    | FlightControllerCreateWithoutPostedByInput
+  >;
+  delete?: Maybe<
+    FlightControllerWhereUniqueInput[] | FlightControllerWhereUniqueInput
+  >;
+  connect?: Maybe<
+    FlightControllerWhereUniqueInput[] | FlightControllerWhereUniqueInput
+  >;
+  set?: Maybe<
+    FlightControllerWhereUniqueInput[] | FlightControllerWhereUniqueInput
+  >;
+  disconnect?: Maybe<
+    FlightControllerWhereUniqueInput[] | FlightControllerWhereUniqueInput
+  >;
+  update?: Maybe<
+    | FlightControllerUpdateWithWhereUniqueWithoutPostedByInput[]
+    | FlightControllerUpdateWithWhereUniqueWithoutPostedByInput
+  >;
+  upsert?: Maybe<
+    | FlightControllerUpsertWithWhereUniqueWithoutPostedByInput[]
+    | FlightControllerUpsertWithWhereUniqueWithoutPostedByInput
+  >;
+  deleteMany?: Maybe<
+    FlightControllerScalarWhereInput[] | FlightControllerScalarWhereInput
+  >;
+  updateMany?: Maybe<
+    | FlightControllerUpdateManyWithWhereNestedInput[]
+    | FlightControllerUpdateManyWithWhereNestedInput
+  >;
 }
 
 export interface VoteSubscriptionWhereInput {
@@ -589,21 +1016,43 @@ export interface VoteSubscriptionWhereInput {
   NOT?: Maybe<VoteSubscriptionWhereInput[] | VoteSubscriptionWhereInput>;
 }
 
-export interface LinkUpdateWithoutVotesDataInput {
-  description?: Maybe<String>;
-  url?: Maybe<String>;
-  postedBy?: Maybe<UserUpdateOneWithoutLinksInput>;
+export interface FlightControllerUpdateWithWhereUniqueWithoutPostedByInput {
+  where: FlightControllerWhereUniqueInput;
+  data: FlightControllerUpdateWithoutPostedByDataInput;
 }
 
-export interface VoteCreateInput {
-  id?: Maybe<ID_Input>;
-  link: LinkCreateOneWithoutVotesInput;
-  user: UserCreateOneWithoutVotesInput;
+export interface VoteUpdateInput {
+  link?: Maybe<LinkUpdateOneRequiredWithoutVotesInput>;
+  user?: Maybe<UserUpdateOneRequiredWithoutVotesInput>;
 }
 
-export interface LinkUpsertWithoutVotesInput {
-  update: LinkUpdateWithoutVotesDataInput;
-  create: LinkCreateWithoutVotesInput;
+export interface FlightControllerUpdateWithoutPostedByDataInput {
+  name?: Maybe<String>;
+  releaseDate?: Maybe<DateTimeInput>;
+  uarts?: Maybe<Int>;
+  GyroOne?: Maybe<Float>;
+  GyroTwo?: Maybe<Float>;
+  weightInGrams?: Maybe<Float>;
+  cpu?: Maybe<String>;
+  dimensions?: Maybe<String>;
+  holePattern?: Maybe<String>;
+  voltageInputMin?: Maybe<Float>;
+  voltageInputMax?: Maybe<Float>;
+  osd?: Maybe<Boolean>;
+  accelerometer?: Maybe<Boolean>;
+  barometer?: Maybe<Boolean>;
+  spektrumPort?: Maybe<Boolean>;
+  usbInterface?: Maybe<Boolean>;
+  LedWS2812Support?: Maybe<Boolean>;
+  RSSIPad?: Maybe<Boolean>;
+  currentSensor?: Maybe<Boolean>;
+  beeperPad?: Maybe<Boolean>;
+  beeperOnBoard?: Maybe<Boolean>;
+  antiVibrationGrommets?: Maybe<Boolean>;
+  builtInReceiver?: Maybe<String>;
+  ThreeVoltOutput?: Maybe<Boolean>;
+  FiveVoltOut?: Maybe<Boolean>;
+  CameraControl?: Maybe<Boolean>;
 }
 
 export interface UserCreateInput {
@@ -613,6 +1062,201 @@ export interface UserCreateInput {
   password: String;
   links?: Maybe<LinkCreateManyWithoutPostedByInput>;
   votes?: Maybe<VoteCreateManyWithoutUserInput>;
+  flightControllers?: Maybe<FlightControllerCreateManyWithoutPostedByInput>;
+}
+
+export interface FlightControllerUpsertWithWhereUniqueWithoutPostedByInput {
+  where: FlightControllerWhereUniqueInput;
+  update: FlightControllerUpdateWithoutPostedByDataInput;
+  create: FlightControllerCreateWithoutPostedByInput;
+}
+
+export interface LinkCreateInput {
+  id?: Maybe<ID_Input>;
+  description: String;
+  url: String;
+  postedBy?: Maybe<UserCreateOneWithoutLinksInput>;
+  votes?: Maybe<VoteCreateManyWithoutLinkInput>;
+}
+
+export interface FlightControllerScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  releaseDate?: Maybe<DateTimeInput>;
+  releaseDate_not?: Maybe<DateTimeInput>;
+  releaseDate_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  releaseDate_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  releaseDate_lt?: Maybe<DateTimeInput>;
+  releaseDate_lte?: Maybe<DateTimeInput>;
+  releaseDate_gt?: Maybe<DateTimeInput>;
+  releaseDate_gte?: Maybe<DateTimeInput>;
+  uarts?: Maybe<Int>;
+  uarts_not?: Maybe<Int>;
+  uarts_in?: Maybe<Int[] | Int>;
+  uarts_not_in?: Maybe<Int[] | Int>;
+  uarts_lt?: Maybe<Int>;
+  uarts_lte?: Maybe<Int>;
+  uarts_gt?: Maybe<Int>;
+  uarts_gte?: Maybe<Int>;
+  GyroOne?: Maybe<Float>;
+  GyroOne_not?: Maybe<Float>;
+  GyroOne_in?: Maybe<Float[] | Float>;
+  GyroOne_not_in?: Maybe<Float[] | Float>;
+  GyroOne_lt?: Maybe<Float>;
+  GyroOne_lte?: Maybe<Float>;
+  GyroOne_gt?: Maybe<Float>;
+  GyroOne_gte?: Maybe<Float>;
+  GyroTwo?: Maybe<Float>;
+  GyroTwo_not?: Maybe<Float>;
+  GyroTwo_in?: Maybe<Float[] | Float>;
+  GyroTwo_not_in?: Maybe<Float[] | Float>;
+  GyroTwo_lt?: Maybe<Float>;
+  GyroTwo_lte?: Maybe<Float>;
+  GyroTwo_gt?: Maybe<Float>;
+  GyroTwo_gte?: Maybe<Float>;
+  weightInGrams?: Maybe<Float>;
+  weightInGrams_not?: Maybe<Float>;
+  weightInGrams_in?: Maybe<Float[] | Float>;
+  weightInGrams_not_in?: Maybe<Float[] | Float>;
+  weightInGrams_lt?: Maybe<Float>;
+  weightInGrams_lte?: Maybe<Float>;
+  weightInGrams_gt?: Maybe<Float>;
+  weightInGrams_gte?: Maybe<Float>;
+  cpu?: Maybe<String>;
+  cpu_not?: Maybe<String>;
+  cpu_in?: Maybe<String[] | String>;
+  cpu_not_in?: Maybe<String[] | String>;
+  cpu_lt?: Maybe<String>;
+  cpu_lte?: Maybe<String>;
+  cpu_gt?: Maybe<String>;
+  cpu_gte?: Maybe<String>;
+  cpu_contains?: Maybe<String>;
+  cpu_not_contains?: Maybe<String>;
+  cpu_starts_with?: Maybe<String>;
+  cpu_not_starts_with?: Maybe<String>;
+  cpu_ends_with?: Maybe<String>;
+  cpu_not_ends_with?: Maybe<String>;
+  dimensions?: Maybe<String>;
+  dimensions_not?: Maybe<String>;
+  dimensions_in?: Maybe<String[] | String>;
+  dimensions_not_in?: Maybe<String[] | String>;
+  dimensions_lt?: Maybe<String>;
+  dimensions_lte?: Maybe<String>;
+  dimensions_gt?: Maybe<String>;
+  dimensions_gte?: Maybe<String>;
+  dimensions_contains?: Maybe<String>;
+  dimensions_not_contains?: Maybe<String>;
+  dimensions_starts_with?: Maybe<String>;
+  dimensions_not_starts_with?: Maybe<String>;
+  dimensions_ends_with?: Maybe<String>;
+  dimensions_not_ends_with?: Maybe<String>;
+  holePattern?: Maybe<String>;
+  holePattern_not?: Maybe<String>;
+  holePattern_in?: Maybe<String[] | String>;
+  holePattern_not_in?: Maybe<String[] | String>;
+  holePattern_lt?: Maybe<String>;
+  holePattern_lte?: Maybe<String>;
+  holePattern_gt?: Maybe<String>;
+  holePattern_gte?: Maybe<String>;
+  holePattern_contains?: Maybe<String>;
+  holePattern_not_contains?: Maybe<String>;
+  holePattern_starts_with?: Maybe<String>;
+  holePattern_not_starts_with?: Maybe<String>;
+  holePattern_ends_with?: Maybe<String>;
+  holePattern_not_ends_with?: Maybe<String>;
+  voltageInputMin?: Maybe<Float>;
+  voltageInputMin_not?: Maybe<Float>;
+  voltageInputMin_in?: Maybe<Float[] | Float>;
+  voltageInputMin_not_in?: Maybe<Float[] | Float>;
+  voltageInputMin_lt?: Maybe<Float>;
+  voltageInputMin_lte?: Maybe<Float>;
+  voltageInputMin_gt?: Maybe<Float>;
+  voltageInputMin_gte?: Maybe<Float>;
+  voltageInputMax?: Maybe<Float>;
+  voltageInputMax_not?: Maybe<Float>;
+  voltageInputMax_in?: Maybe<Float[] | Float>;
+  voltageInputMax_not_in?: Maybe<Float[] | Float>;
+  voltageInputMax_lt?: Maybe<Float>;
+  voltageInputMax_lte?: Maybe<Float>;
+  voltageInputMax_gt?: Maybe<Float>;
+  voltageInputMax_gte?: Maybe<Float>;
+  osd?: Maybe<Boolean>;
+  osd_not?: Maybe<Boolean>;
+  accelerometer?: Maybe<Boolean>;
+  accelerometer_not?: Maybe<Boolean>;
+  barometer?: Maybe<Boolean>;
+  barometer_not?: Maybe<Boolean>;
+  spektrumPort?: Maybe<Boolean>;
+  spektrumPort_not?: Maybe<Boolean>;
+  usbInterface?: Maybe<Boolean>;
+  usbInterface_not?: Maybe<Boolean>;
+  LedWS2812Support?: Maybe<Boolean>;
+  LedWS2812Support_not?: Maybe<Boolean>;
+  RSSIPad?: Maybe<Boolean>;
+  RSSIPad_not?: Maybe<Boolean>;
+  currentSensor?: Maybe<Boolean>;
+  currentSensor_not?: Maybe<Boolean>;
+  beeperPad?: Maybe<Boolean>;
+  beeperPad_not?: Maybe<Boolean>;
+  beeperOnBoard?: Maybe<Boolean>;
+  beeperOnBoard_not?: Maybe<Boolean>;
+  antiVibrationGrommets?: Maybe<Boolean>;
+  antiVibrationGrommets_not?: Maybe<Boolean>;
+  builtInReceiver?: Maybe<String>;
+  builtInReceiver_not?: Maybe<String>;
+  builtInReceiver_in?: Maybe<String[] | String>;
+  builtInReceiver_not_in?: Maybe<String[] | String>;
+  builtInReceiver_lt?: Maybe<String>;
+  builtInReceiver_lte?: Maybe<String>;
+  builtInReceiver_gt?: Maybe<String>;
+  builtInReceiver_gte?: Maybe<String>;
+  builtInReceiver_contains?: Maybe<String>;
+  builtInReceiver_not_contains?: Maybe<String>;
+  builtInReceiver_starts_with?: Maybe<String>;
+  builtInReceiver_not_starts_with?: Maybe<String>;
+  builtInReceiver_ends_with?: Maybe<String>;
+  builtInReceiver_not_ends_with?: Maybe<String>;
+  ThreeVoltOutput?: Maybe<Boolean>;
+  ThreeVoltOutput_not?: Maybe<Boolean>;
+  FiveVoltOut?: Maybe<Boolean>;
+  FiveVoltOut_not?: Maybe<Boolean>;
+  CameraControl?: Maybe<Boolean>;
+  CameraControl_not?: Maybe<Boolean>;
+  AND?: Maybe<
+    FlightControllerScalarWhereInput[] | FlightControllerScalarWhereInput
+  >;
+  OR?: Maybe<
+    FlightControllerScalarWhereInput[] | FlightControllerScalarWhereInput
+  >;
+  NOT?: Maybe<
+    FlightControllerScalarWhereInput[] | FlightControllerScalarWhereInput
+  >;
 }
 
 export interface VoteUpsertWithWhereUniqueWithoutUserInput {
@@ -621,9 +1265,89 @@ export interface VoteUpsertWithWhereUniqueWithoutUserInput {
   create: VoteCreateWithoutUserInput;
 }
 
+export interface FlightControllerUpdateManyWithWhereNestedInput {
+  where: FlightControllerScalarWhereInput;
+  data: FlightControllerUpdateManyDataInput;
+}
+
+export interface UserUpdateWithoutLinksDataInput {
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+  votes?: Maybe<VoteUpdateManyWithoutUserInput>;
+  flightControllers?: Maybe<FlightControllerUpdateManyWithoutPostedByInput>;
+}
+
+export interface FlightControllerUpdateManyDataInput {
+  name?: Maybe<String>;
+  releaseDate?: Maybe<DateTimeInput>;
+  uarts?: Maybe<Int>;
+  GyroOne?: Maybe<Float>;
+  GyroTwo?: Maybe<Float>;
+  weightInGrams?: Maybe<Float>;
+  cpu?: Maybe<String>;
+  dimensions?: Maybe<String>;
+  holePattern?: Maybe<String>;
+  voltageInputMin?: Maybe<Float>;
+  voltageInputMax?: Maybe<Float>;
+  osd?: Maybe<Boolean>;
+  accelerometer?: Maybe<Boolean>;
+  barometer?: Maybe<Boolean>;
+  spektrumPort?: Maybe<Boolean>;
+  usbInterface?: Maybe<Boolean>;
+  LedWS2812Support?: Maybe<Boolean>;
+  RSSIPad?: Maybe<Boolean>;
+  currentSensor?: Maybe<Boolean>;
+  beeperPad?: Maybe<Boolean>;
+  beeperOnBoard?: Maybe<Boolean>;
+  antiVibrationGrommets?: Maybe<Boolean>;
+  builtInReceiver?: Maybe<String>;
+  ThreeVoltOutput?: Maybe<Boolean>;
+  FiveVoltOut?: Maybe<Boolean>;
+  CameraControl?: Maybe<Boolean>;
+}
+
+export interface UserCreateOneWithoutFlightControllersInput {
+  create?: Maybe<UserCreateWithoutFlightControllersInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
 export interface UserUpsertWithoutVotesInput {
   update: UserUpdateWithoutVotesDataInput;
   create: UserCreateWithoutVotesInput;
+}
+
+export interface VoteCreateManyWithoutLinkInput {
+  create?: Maybe<VoteCreateWithoutLinkInput[] | VoteCreateWithoutLinkInput>;
+  connect?: Maybe<VoteWhereUniqueInput[] | VoteWhereUniqueInput>;
+}
+
+export interface VoteUpsertWithWhereUniqueWithoutLinkInput {
+  where: VoteWhereUniqueInput;
+  update: VoteUpdateWithoutLinkDataInput;
+  create: VoteCreateWithoutLinkInput;
+}
+
+export interface VoteWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  link?: Maybe<LinkWhereInput>;
+  user?: Maybe<UserWhereInput>;
+  AND?: Maybe<VoteWhereInput[] | VoteWhereInput>;
+  OR?: Maybe<VoteWhereInput[] | VoteWhereInput>;
+  NOT?: Maybe<VoteWhereInput[] | VoteWhereInput>;
 }
 
 export interface VoteScalarWhereInput {
@@ -646,39 +1370,138 @@ export interface VoteScalarWhereInput {
   NOT?: Maybe<VoteScalarWhereInput[] | VoteScalarWhereInput>;
 }
 
-export interface LinkCreateInput {
+export interface UserUpdateManyMutationInput {
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+}
+
+export interface LinkUpsertWithWhereUniqueWithoutPostedByInput {
+  where: LinkWhereUniqueInput;
+  update: LinkUpdateWithoutPostedByDataInput;
+  create: LinkCreateWithoutPostedByInput;
+}
+
+export interface FlightControllerUpdateManyMutationInput {
+  name?: Maybe<String>;
+  releaseDate?: Maybe<DateTimeInput>;
+  uarts?: Maybe<Int>;
+  GyroOne?: Maybe<Float>;
+  GyroTwo?: Maybe<Float>;
+  weightInGrams?: Maybe<Float>;
+  cpu?: Maybe<String>;
+  dimensions?: Maybe<String>;
+  holePattern?: Maybe<String>;
+  voltageInputMin?: Maybe<Float>;
+  voltageInputMax?: Maybe<Float>;
+  osd?: Maybe<Boolean>;
+  accelerometer?: Maybe<Boolean>;
+  barometer?: Maybe<Boolean>;
+  spektrumPort?: Maybe<Boolean>;
+  usbInterface?: Maybe<Boolean>;
+  LedWS2812Support?: Maybe<Boolean>;
+  RSSIPad?: Maybe<Boolean>;
+  currentSensor?: Maybe<Boolean>;
+  beeperPad?: Maybe<Boolean>;
+  beeperOnBoard?: Maybe<Boolean>;
+  antiVibrationGrommets?: Maybe<Boolean>;
+  builtInReceiver?: Maybe<String>;
+  ThreeVoltOutput?: Maybe<Boolean>;
+  FiveVoltOut?: Maybe<Boolean>;
+  CameraControl?: Maybe<Boolean>;
+}
+
+export interface LinkScalarWhereInput {
   id?: Maybe<ID_Input>;
-  description: String;
-  url: String;
-  postedBy?: Maybe<UserCreateOneWithoutLinksInput>;
-  votes?: Maybe<VoteCreateManyWithoutLinkInput>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  description?: Maybe<String>;
+  description_not?: Maybe<String>;
+  description_in?: Maybe<String[] | String>;
+  description_not_in?: Maybe<String[] | String>;
+  description_lt?: Maybe<String>;
+  description_lte?: Maybe<String>;
+  description_gt?: Maybe<String>;
+  description_gte?: Maybe<String>;
+  description_contains?: Maybe<String>;
+  description_not_contains?: Maybe<String>;
+  description_starts_with?: Maybe<String>;
+  description_not_starts_with?: Maybe<String>;
+  description_ends_with?: Maybe<String>;
+  description_not_ends_with?: Maybe<String>;
+  url?: Maybe<String>;
+  url_not?: Maybe<String>;
+  url_in?: Maybe<String[] | String>;
+  url_not_in?: Maybe<String[] | String>;
+  url_lt?: Maybe<String>;
+  url_lte?: Maybe<String>;
+  url_gt?: Maybe<String>;
+  url_gte?: Maybe<String>;
+  url_contains?: Maybe<String>;
+  url_not_contains?: Maybe<String>;
+  url_starts_with?: Maybe<String>;
+  url_not_starts_with?: Maybe<String>;
+  url_ends_with?: Maybe<String>;
+  url_not_ends_with?: Maybe<String>;
+  AND?: Maybe<LinkScalarWhereInput[] | LinkScalarWhereInput>;
+  OR?: Maybe<LinkScalarWhereInput[] | LinkScalarWhereInput>;
+  NOT?: Maybe<LinkScalarWhereInput[] | LinkScalarWhereInput>;
 }
 
-export interface UserUpsertWithoutLinksInput {
-  update: UserUpdateWithoutLinksDataInput;
-  create: UserCreateWithoutLinksInput;
+export interface UserCreateOneWithoutVotesInput {
+  create?: Maybe<UserCreateWithoutVotesInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
 }
 
-export interface VoteCreateWithoutUserInput {
-  id?: Maybe<ID_Input>;
-  link: LinkCreateOneWithoutVotesInput;
+export interface VoteUpdateWithWhereUniqueWithoutUserInput {
+  where: VoteWhereUniqueInput;
+  data: VoteUpdateWithoutUserDataInput;
 }
 
-export interface VoteUpdateManyWithoutLinkInput {
-  create?: Maybe<VoteCreateWithoutLinkInput[] | VoteCreateWithoutLinkInput>;
+export interface VoteUpdateManyWithoutUserInput {
+  create?: Maybe<VoteCreateWithoutUserInput[] | VoteCreateWithoutUserInput>;
   delete?: Maybe<VoteWhereUniqueInput[] | VoteWhereUniqueInput>;
   connect?: Maybe<VoteWhereUniqueInput[] | VoteWhereUniqueInput>;
   set?: Maybe<VoteWhereUniqueInput[] | VoteWhereUniqueInput>;
   disconnect?: Maybe<VoteWhereUniqueInput[] | VoteWhereUniqueInput>;
   update?: Maybe<
-    | VoteUpdateWithWhereUniqueWithoutLinkInput[]
-    | VoteUpdateWithWhereUniqueWithoutLinkInput
+    | VoteUpdateWithWhereUniqueWithoutUserInput[]
+    | VoteUpdateWithWhereUniqueWithoutUserInput
   >;
   upsert?: Maybe<
-    | VoteUpsertWithWhereUniqueWithoutLinkInput[]
-    | VoteUpsertWithWhereUniqueWithoutLinkInput
+    | VoteUpsertWithWhereUniqueWithoutUserInput[]
+    | VoteUpsertWithWhereUniqueWithoutUserInput
   >;
   deleteMany?: Maybe<VoteScalarWhereInput[] | VoteScalarWhereInput>;
+}
+
+export interface LinkUpdateManyDataInput {
+  description?: Maybe<String>;
+  url?: Maybe<String>;
+}
+
+export interface LinkUpdateManyWithWhereNestedInput {
+  where: LinkScalarWhereInput;
+  data: LinkUpdateManyDataInput;
 }
 
 export interface LinkSubscriptionWhereInput {
@@ -692,80 +1515,20 @@ export interface LinkSubscriptionWhereInput {
   NOT?: Maybe<LinkSubscriptionWhereInput[] | LinkSubscriptionWhereInput>;
 }
 
-export interface VoteUpdateWithWhereUniqueWithoutLinkInput {
-  where: VoteWhereUniqueInput;
-  data: VoteUpdateWithoutLinkDataInput;
-}
-
-export interface VoteUpsertWithWhereUniqueWithoutLinkInput {
-  where: VoteWhereUniqueInput;
-  update: VoteUpdateWithoutLinkDataInput;
-  create: VoteCreateWithoutLinkInput;
-}
-
-export interface LinkUpdateManyWithoutPostedByInput {
+export interface LinkCreateManyWithoutPostedByInput {
   create?: Maybe<
     LinkCreateWithoutPostedByInput[] | LinkCreateWithoutPostedByInput
   >;
-  delete?: Maybe<LinkWhereUniqueInput[] | LinkWhereUniqueInput>;
   connect?: Maybe<LinkWhereUniqueInput[] | LinkWhereUniqueInput>;
-  set?: Maybe<LinkWhereUniqueInput[] | LinkWhereUniqueInput>;
-  disconnect?: Maybe<LinkWhereUniqueInput[] | LinkWhereUniqueInput>;
-  update?: Maybe<
-    | LinkUpdateWithWhereUniqueWithoutPostedByInput[]
-    | LinkUpdateWithWhereUniqueWithoutPostedByInput
-  >;
-  upsert?: Maybe<
-    | LinkUpsertWithWhereUniqueWithoutPostedByInput[]
-    | LinkUpsertWithWhereUniqueWithoutPostedByInput
-  >;
-  deleteMany?: Maybe<LinkScalarWhereInput[] | LinkScalarWhereInput>;
-  updateMany?: Maybe<
-    LinkUpdateManyWithWhereNestedInput[] | LinkUpdateManyWithWhereNestedInput
-  >;
 }
 
-export interface UserUpdateWithoutVotesDataInput {
-  name?: Maybe<String>;
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-  links?: Maybe<LinkUpdateManyWithoutPostedByInput>;
-}
-
-export interface UserUpdateOneRequiredWithoutVotesInput {
-  create?: Maybe<UserCreateWithoutVotesInput>;
-  update?: Maybe<UserUpdateWithoutVotesDataInput>;
-  upsert?: Maybe<UserUpsertWithoutVotesInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface VoteUpdateWithoutLinkDataInput {
-  user?: Maybe<UserUpdateOneRequiredWithoutVotesInput>;
-}
-
-export interface LinkUpdateManyWithWhereNestedInput {
-  where: LinkScalarWhereInput;
-  data: LinkUpdateManyDataInput;
-}
-
-export type UserWhereUniqueInput = AtLeastOne<{
+export type VoteWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
-  email?: Maybe<String>;
 }>;
 
-export interface LinkCreateWithoutVotesInput {
-  id?: Maybe<ID_Input>;
-  description: String;
-  url: String;
-  postedBy?: Maybe<UserCreateOneWithoutLinksInput>;
-}
-
-export interface UserCreateWithoutLinksInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  email: String;
-  password: String;
-  votes?: Maybe<VoteCreateManyWithoutUserInput>;
+export interface LinkUpdateManyMutationInput {
+  description?: Maybe<String>;
+  url?: Maybe<String>;
 }
 
 export interface NodeNode {
@@ -788,87 +1551,27 @@ export interface VotePreviousValuesSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
 }
 
-export interface UserConnection {
-  pageInfo: PageInfo;
-  edges: UserEdge[];
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
 }
 
-export interface UserConnectionPromise
-  extends Promise<UserConnection>,
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
+}
+
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<UserEdge>>() => T;
-  aggregate: <T = AggregateUserPromise>() => T;
-}
-
-export interface UserConnectionSubscription
-  extends Promise<AsyncIterator<UserConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateUserSubscription>() => T;
-}
-
-export interface LinkConnection {
-  pageInfo: PageInfo;
-  edges: LinkEdge[];
-}
-
-export interface LinkConnectionPromise
-  extends Promise<LinkConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<LinkEdge>>() => T;
-  aggregate: <T = AggregateLinkPromise>() => T;
-}
-
-export interface LinkConnectionSubscription
-  extends Promise<AsyncIterator<LinkConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<LinkEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateLinkSubscription>() => T;
-}
-
-export interface UserPreviousValues {
-  id: ID_Output;
-  name: String;
-  email: String;
-  password: String;
-}
-
-export interface UserPreviousValuesPromise
-  extends Promise<UserPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  email: () => Promise<String>;
-  password: () => Promise<String>;
-}
-
-export interface UserPreviousValuesSubscription
-  extends Promise<AsyncIterator<UserPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  email: () => Promise<AsyncIterator<String>>;
-  password: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateLink {
-  count: Int;
-}
-
-export interface AggregateLinkPromise
-  extends Promise<AggregateLink>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateLinkSubscription
-  extends Promise<AsyncIterator<AggregateLink>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface User {
@@ -895,6 +1598,15 @@ export interface UserPromise extends Promise<User>, Fragmentable {
   votes: <T = FragmentableArray<Vote>>(args?: {
     where?: VoteWhereInput;
     orderBy?: VoteOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  flightControllers: <T = FragmentableArray<FlightController>>(args?: {
+    where?: FlightControllerWhereInput;
+    orderBy?: FlightControllerOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
@@ -928,6 +1640,17 @@ export interface UserSubscription
     first?: Int;
     last?: Int;
   }) => T;
+  flightControllers: <
+    T = Promise<AsyncIterator<FlightControllerSubscription>>
+  >(args?: {
+    where?: FlightControllerWhereInput;
+    orderBy?: FlightControllerOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface UserNullablePromise
@@ -955,6 +1678,36 @@ export interface UserNullablePromise
     first?: Int;
     last?: Int;
   }) => T;
+  flightControllers: <T = FragmentableArray<FlightController>>(args?: {
+    where?: FlightControllerWhereInput;
+    orderBy?: FlightControllerOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface FlightControllerConnection {
+  pageInfo: PageInfo;
+  edges: FlightControllerEdge[];
+}
+
+export interface FlightControllerConnectionPromise
+  extends Promise<FlightControllerConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<FlightControllerEdge>>() => T;
+  aggregate: <T = AggregateFlightControllerPromise>() => T;
+}
+
+export interface FlightControllerConnectionSubscription
+  extends Promise<AsyncIterator<FlightControllerConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<FlightControllerEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateFlightControllerSubscription>() => T;
 }
 
 export interface AggregateVote {
@@ -973,42 +1726,48 @@ export interface AggregateVoteSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface LinkEdge {
-  node: Link;
+export interface FlightControllerEdge {
+  node: FlightController;
   cursor: String;
 }
 
-export interface LinkEdgePromise extends Promise<LinkEdge>, Fragmentable {
-  node: <T = LinkPromise>() => T;
+export interface FlightControllerEdgePromise
+  extends Promise<FlightControllerEdge>,
+    Fragmentable {
+  node: <T = FlightControllerPromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface LinkEdgeSubscription
-  extends Promise<AsyncIterator<LinkEdge>>,
+export interface FlightControllerEdgeSubscription
+  extends Promise<AsyncIterator<FlightControllerEdge>>,
     Fragmentable {
-  node: <T = LinkSubscription>() => T;
+  node: <T = FlightControllerSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface VoteConnection {
-  pageInfo: PageInfo;
-  edges: VoteEdge[];
+export interface LinkPreviousValues {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  description: String;
+  url: String;
 }
 
-export interface VoteConnectionPromise
-  extends Promise<VoteConnection>,
+export interface LinkPreviousValuesPromise
+  extends Promise<LinkPreviousValues>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<VoteEdge>>() => T;
-  aggregate: <T = AggregateVotePromise>() => T;
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  description: () => Promise<String>;
+  url: () => Promise<String>;
 }
 
-export interface VoteConnectionSubscription
-  extends Promise<AsyncIterator<VoteConnection>>,
+export interface LinkPreviousValuesSubscription
+  extends Promise<AsyncIterator<LinkPreviousValues>>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<VoteEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateVoteSubscription>() => T;
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  description: () => Promise<AsyncIterator<String>>;
+  url: () => Promise<AsyncIterator<String>>;
 }
 
 export interface UserSubscriptionPayload {
@@ -1036,21 +1795,95 @@ export interface UserSubscriptionPayloadSubscription
   previousValues: <T = UserPreviousValuesSubscription>() => T;
 }
 
-export interface UserEdge {
-  node: User;
+export interface VoteConnection {
+  pageInfo: PageInfo;
+  edges: VoteEdge[];
+}
+
+export interface VoteConnectionPromise
+  extends Promise<VoteConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<VoteEdge>>() => T;
+  aggregate: <T = AggregateVotePromise>() => T;
+}
+
+export interface VoteConnectionSubscription
+  extends Promise<AsyncIterator<VoteConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<VoteEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateVoteSubscription>() => T;
+}
+
+export interface VoteEdge {
+  node: Vote;
   cursor: String;
 }
 
-export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
-  node: <T = UserPromise>() => T;
+export interface VoteEdgePromise extends Promise<VoteEdge>, Fragmentable {
+  node: <T = VotePromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface UserEdgeSubscription
-  extends Promise<AsyncIterator<UserEdge>>,
+export interface VoteEdgeSubscription
+  extends Promise<AsyncIterator<VoteEdge>>,
     Fragmentable {
-  node: <T = UserSubscription>() => T;
+  node: <T = VoteSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface UserConnection {
+  pageInfo: PageInfo;
+  edges: UserEdge[];
+}
+
+export interface UserConnectionPromise
+  extends Promise<UserConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<UserEdge>>() => T;
+  aggregate: <T = AggregateUserPromise>() => T;
+}
+
+export interface UserConnectionSubscription
+  extends Promise<AsyncIterator<UserConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateUserSubscription>() => T;
+}
+
+export interface AggregateUser {
+  count: Int;
+}
+
+export interface AggregateUserPromise
+  extends Promise<AggregateUser>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateUserSubscription
+  extends Promise<AsyncIterator<AggregateUser>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface BatchPayload {
+  count: Long;
+}
+
+export interface BatchPayloadPromise
+  extends Promise<BatchPayload>,
+    Fragmentable {
+  count: () => Promise<Long>;
+}
+
+export interface BatchPayloadSubscription
+  extends Promise<AsyncIterator<BatchPayload>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Long>>;
 }
 
 export interface Vote {
@@ -1079,29 +1912,187 @@ export interface VoteNullablePromise
   user: <T = UserPromise>() => T;
 }
 
-export interface LinkPreviousValues {
-  id: ID_Output;
-  createdAt: DateTimeOutput;
-  description: String;
-  url: String;
+export interface AggregateLink {
+  count: Int;
 }
 
-export interface LinkPreviousValuesPromise
-  extends Promise<LinkPreviousValues>,
+export interface AggregateLinkPromise
+  extends Promise<AggregateLink>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateLinkSubscription
+  extends Promise<AsyncIterator<AggregateLink>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface FlightController {
+  id: ID_Output;
+  name: String;
+  releaseDate: DateTimeOutput;
+  uarts: Int;
+  GyroOne?: Float;
+  GyroTwo?: Float;
+  weightInGrams?: Float;
+  cpu: String;
+  dimensions?: String;
+  holePattern: String;
+  voltageInputMin: Float;
+  voltageInputMax: Float;
+  osd: Boolean;
+  accelerometer: Boolean;
+  barometer: Boolean;
+  spektrumPort: Boolean;
+  usbInterface: Boolean;
+  LedWS2812Support: Boolean;
+  RSSIPad: Boolean;
+  currentSensor: Boolean;
+  beeperPad: Boolean;
+  beeperOnBoard: Boolean;
+  antiVibrationGrommets: Boolean;
+  builtInReceiver?: String;
+  ThreeVoltOutput?: Boolean;
+  FiveVoltOut?: Boolean;
+  CameraControl?: Boolean;
+}
+
+export interface FlightControllerPromise
+  extends Promise<FlightController>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  description: () => Promise<String>;
-  url: () => Promise<String>;
+  name: () => Promise<String>;
+  releaseDate: () => Promise<DateTimeOutput>;
+  uarts: () => Promise<Int>;
+  GyroOne: () => Promise<Float>;
+  GyroTwo: () => Promise<Float>;
+  weightInGrams: () => Promise<Float>;
+  cpu: () => Promise<String>;
+  dimensions: () => Promise<String>;
+  holePattern: () => Promise<String>;
+  voltageInputMin: () => Promise<Float>;
+  voltageInputMax: () => Promise<Float>;
+  osd: () => Promise<Boolean>;
+  accelerometer: () => Promise<Boolean>;
+  barometer: () => Promise<Boolean>;
+  spektrumPort: () => Promise<Boolean>;
+  usbInterface: () => Promise<Boolean>;
+  LedWS2812Support: () => Promise<Boolean>;
+  RSSIPad: () => Promise<Boolean>;
+  currentSensor: () => Promise<Boolean>;
+  beeperPad: () => Promise<Boolean>;
+  beeperOnBoard: () => Promise<Boolean>;
+  antiVibrationGrommets: () => Promise<Boolean>;
+  builtInReceiver: () => Promise<String>;
+  postedBy: <T = UserPromise>() => T;
+  ThreeVoltOutput: () => Promise<Boolean>;
+  FiveVoltOut: () => Promise<Boolean>;
+  CameraControl: () => Promise<Boolean>;
 }
 
-export interface LinkPreviousValuesSubscription
-  extends Promise<AsyncIterator<LinkPreviousValues>>,
+export interface FlightControllerSubscription
+  extends Promise<AsyncIterator<FlightController>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  description: () => Promise<AsyncIterator<String>>;
-  url: () => Promise<AsyncIterator<String>>;
+  name: () => Promise<AsyncIterator<String>>;
+  releaseDate: () => Promise<AsyncIterator<DateTimeOutput>>;
+  uarts: () => Promise<AsyncIterator<Int>>;
+  GyroOne: () => Promise<AsyncIterator<Float>>;
+  GyroTwo: () => Promise<AsyncIterator<Float>>;
+  weightInGrams: () => Promise<AsyncIterator<Float>>;
+  cpu: () => Promise<AsyncIterator<String>>;
+  dimensions: () => Promise<AsyncIterator<String>>;
+  holePattern: () => Promise<AsyncIterator<String>>;
+  voltageInputMin: () => Promise<AsyncIterator<Float>>;
+  voltageInputMax: () => Promise<AsyncIterator<Float>>;
+  osd: () => Promise<AsyncIterator<Boolean>>;
+  accelerometer: () => Promise<AsyncIterator<Boolean>>;
+  barometer: () => Promise<AsyncIterator<Boolean>>;
+  spektrumPort: () => Promise<AsyncIterator<Boolean>>;
+  usbInterface: () => Promise<AsyncIterator<Boolean>>;
+  LedWS2812Support: () => Promise<AsyncIterator<Boolean>>;
+  RSSIPad: () => Promise<AsyncIterator<Boolean>>;
+  currentSensor: () => Promise<AsyncIterator<Boolean>>;
+  beeperPad: () => Promise<AsyncIterator<Boolean>>;
+  beeperOnBoard: () => Promise<AsyncIterator<Boolean>>;
+  antiVibrationGrommets: () => Promise<AsyncIterator<Boolean>>;
+  builtInReceiver: () => Promise<AsyncIterator<String>>;
+  postedBy: <T = UserSubscription>() => T;
+  ThreeVoltOutput: () => Promise<AsyncIterator<Boolean>>;
+  FiveVoltOut: () => Promise<AsyncIterator<Boolean>>;
+  CameraControl: () => Promise<AsyncIterator<Boolean>>;
+}
+
+export interface FlightControllerNullablePromise
+  extends Promise<FlightController | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  releaseDate: () => Promise<DateTimeOutput>;
+  uarts: () => Promise<Int>;
+  GyroOne: () => Promise<Float>;
+  GyroTwo: () => Promise<Float>;
+  weightInGrams: () => Promise<Float>;
+  cpu: () => Promise<String>;
+  dimensions: () => Promise<String>;
+  holePattern: () => Promise<String>;
+  voltageInputMin: () => Promise<Float>;
+  voltageInputMax: () => Promise<Float>;
+  osd: () => Promise<Boolean>;
+  accelerometer: () => Promise<Boolean>;
+  barometer: () => Promise<Boolean>;
+  spektrumPort: () => Promise<Boolean>;
+  usbInterface: () => Promise<Boolean>;
+  LedWS2812Support: () => Promise<Boolean>;
+  RSSIPad: () => Promise<Boolean>;
+  currentSensor: () => Promise<Boolean>;
+  beeperPad: () => Promise<Boolean>;
+  beeperOnBoard: () => Promise<Boolean>;
+  antiVibrationGrommets: () => Promise<Boolean>;
+  builtInReceiver: () => Promise<String>;
+  postedBy: <T = UserPromise>() => T;
+  ThreeVoltOutput: () => Promise<Boolean>;
+  FiveVoltOut: () => Promise<Boolean>;
+  CameraControl: () => Promise<Boolean>;
+}
+
+export interface LinkConnection {
+  pageInfo: PageInfo;
+  edges: LinkEdge[];
+}
+
+export interface LinkConnectionPromise
+  extends Promise<LinkConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<LinkEdge>>() => T;
+  aggregate: <T = AggregateLinkPromise>() => T;
+}
+
+export interface LinkConnectionSubscription
+  extends Promise<AsyncIterator<LinkConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<LinkEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateLinkSubscription>() => T;
+}
+
+export interface UserEdge {
+  node: User;
+  cursor: String;
+}
+
+export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
+  node: <T = UserPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface UserEdgeSubscription
+  extends Promise<AsyncIterator<UserEdge>>,
+    Fragmentable {
+  node: <T = UserSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface LinkSubscriptionPayload {
@@ -1191,27 +2182,123 @@ export interface LinkNullablePromise
   }) => T;
 }
 
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
+export interface FlightControllerPreviousValues {
+  id: ID_Output;
+  name: String;
+  releaseDate: DateTimeOutput;
+  uarts: Int;
+  GyroOne?: Float;
+  GyroTwo?: Float;
+  weightInGrams?: Float;
+  cpu: String;
+  dimensions?: String;
+  holePattern: String;
+  voltageInputMin: Float;
+  voltageInputMax: Float;
+  osd: Boolean;
+  accelerometer: Boolean;
+  barometer: Boolean;
+  spektrumPort: Boolean;
+  usbInterface: Boolean;
+  LedWS2812Support: Boolean;
+  RSSIPad: Boolean;
+  currentSensor: Boolean;
+  beeperPad: Boolean;
+  beeperOnBoard: Boolean;
+  antiVibrationGrommets: Boolean;
+  builtInReceiver?: String;
+  ThreeVoltOutput?: Boolean;
+  FiveVoltOut?: Boolean;
+  CameraControl?: Boolean;
 }
 
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
-}
-
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
+export interface FlightControllerPreviousValuesPromise
+  extends Promise<FlightControllerPreviousValues>,
     Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  releaseDate: () => Promise<DateTimeOutput>;
+  uarts: () => Promise<Int>;
+  GyroOne: () => Promise<Float>;
+  GyroTwo: () => Promise<Float>;
+  weightInGrams: () => Promise<Float>;
+  cpu: () => Promise<String>;
+  dimensions: () => Promise<String>;
+  holePattern: () => Promise<String>;
+  voltageInputMin: () => Promise<Float>;
+  voltageInputMax: () => Promise<Float>;
+  osd: () => Promise<Boolean>;
+  accelerometer: () => Promise<Boolean>;
+  barometer: () => Promise<Boolean>;
+  spektrumPort: () => Promise<Boolean>;
+  usbInterface: () => Promise<Boolean>;
+  LedWS2812Support: () => Promise<Boolean>;
+  RSSIPad: () => Promise<Boolean>;
+  currentSensor: () => Promise<Boolean>;
+  beeperPad: () => Promise<Boolean>;
+  beeperOnBoard: () => Promise<Boolean>;
+  antiVibrationGrommets: () => Promise<Boolean>;
+  builtInReceiver: () => Promise<String>;
+  ThreeVoltOutput: () => Promise<Boolean>;
+  FiveVoltOut: () => Promise<Boolean>;
+  CameraControl: () => Promise<Boolean>;
+}
+
+export interface FlightControllerPreviousValuesSubscription
+  extends Promise<AsyncIterator<FlightControllerPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  releaseDate: () => Promise<AsyncIterator<DateTimeOutput>>;
+  uarts: () => Promise<AsyncIterator<Int>>;
+  GyroOne: () => Promise<AsyncIterator<Float>>;
+  GyroTwo: () => Promise<AsyncIterator<Float>>;
+  weightInGrams: () => Promise<AsyncIterator<Float>>;
+  cpu: () => Promise<AsyncIterator<String>>;
+  dimensions: () => Promise<AsyncIterator<String>>;
+  holePattern: () => Promise<AsyncIterator<String>>;
+  voltageInputMin: () => Promise<AsyncIterator<Float>>;
+  voltageInputMax: () => Promise<AsyncIterator<Float>>;
+  osd: () => Promise<AsyncIterator<Boolean>>;
+  accelerometer: () => Promise<AsyncIterator<Boolean>>;
+  barometer: () => Promise<AsyncIterator<Boolean>>;
+  spektrumPort: () => Promise<AsyncIterator<Boolean>>;
+  usbInterface: () => Promise<AsyncIterator<Boolean>>;
+  LedWS2812Support: () => Promise<AsyncIterator<Boolean>>;
+  RSSIPad: () => Promise<AsyncIterator<Boolean>>;
+  currentSensor: () => Promise<AsyncIterator<Boolean>>;
+  beeperPad: () => Promise<AsyncIterator<Boolean>>;
+  beeperOnBoard: () => Promise<AsyncIterator<Boolean>>;
+  antiVibrationGrommets: () => Promise<AsyncIterator<Boolean>>;
+  builtInReceiver: () => Promise<AsyncIterator<String>>;
+  ThreeVoltOutput: () => Promise<AsyncIterator<Boolean>>;
+  FiveVoltOut: () => Promise<AsyncIterator<Boolean>>;
+  CameraControl: () => Promise<AsyncIterator<Boolean>>;
+}
+
+export interface FlightControllerSubscriptionPayload {
+  mutation: MutationType;
+  node: FlightController;
+  updatedFields: String[];
+  previousValues: FlightControllerPreviousValues;
+}
+
+export interface FlightControllerSubscriptionPayloadPromise
+  extends Promise<FlightControllerSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = FlightControllerPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = FlightControllerPreviousValuesPromise>() => T;
+}
+
+export interface FlightControllerSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<FlightControllerSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = FlightControllerSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = FlightControllerPreviousValuesSubscription>() => T;
 }
 
 export interface VoteSubscriptionPayload {
@@ -1239,72 +2326,63 @@ export interface VoteSubscriptionPayloadSubscription
   previousValues: <T = VotePreviousValuesSubscription>() => T;
 }
 
-export interface BatchPayload {
-  count: Long;
-}
-
-export interface BatchPayloadPromise
-  extends Promise<BatchPayload>,
-    Fragmentable {
-  count: () => Promise<Long>;
-}
-
-export interface BatchPayloadSubscription
-  extends Promise<AsyncIterator<BatchPayload>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Long>>;
-}
-
-export interface AggregateUser {
+export interface AggregateFlightController {
   count: Int;
 }
 
-export interface AggregateUserPromise
-  extends Promise<AggregateUser>,
+export interface AggregateFlightControllerPromise
+  extends Promise<AggregateFlightController>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateUserSubscription
-  extends Promise<AsyncIterator<AggregateUser>>,
+export interface AggregateFlightControllerSubscription
+  extends Promise<AsyncIterator<AggregateFlightController>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface VoteEdge {
-  node: Vote;
+export interface LinkEdge {
+  node: Link;
   cursor: String;
 }
 
-export interface VoteEdgePromise extends Promise<VoteEdge>, Fragmentable {
-  node: <T = VotePromise>() => T;
+export interface LinkEdgePromise extends Promise<LinkEdge>, Fragmentable {
+  node: <T = LinkPromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface VoteEdgeSubscription
-  extends Promise<AsyncIterator<VoteEdge>>,
+export interface LinkEdgeSubscription
+  extends Promise<AsyncIterator<LinkEdge>>,
     Fragmentable {
-  node: <T = VoteSubscription>() => T;
+  node: <T = LinkSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-/*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
-*/
-export type Int = number;
+export interface UserPreviousValues {
+  id: ID_Output;
+  name: String;
+  email: String;
+  password: String;
+}
 
-/*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
-*/
-export type String = string;
+export interface UserPreviousValuesPromise
+  extends Promise<UserPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  email: () => Promise<String>;
+  password: () => Promise<String>;
+}
 
-/*
-The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
-*/
-export type ID_Input = string | number;
-export type ID_Output = string;
-
-export type Long = string;
+export interface UserPreviousValuesSubscription
+  extends Promise<AsyncIterator<UserPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  password: () => Promise<AsyncIterator<String>>;
+}
 
 /*
 DateTime scalar input type, allowing Date
@@ -1321,6 +2399,29 @@ The `Boolean` scalar type represents `true` or `false`.
 */
 export type Boolean = boolean;
 
+/*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
+
+/*
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point). 
+*/
+export type Float = number;
+
+export type Long = string;
+
+/*
+The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
+*/
+export type ID_Input = string | number;
+export type ID_Output = string;
+
+/*
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
+*/
+export type Int = number;
+
 /**
  * Model Metadata
  */
@@ -1336,6 +2437,10 @@ export const models: Model[] = [
   },
   {
     name: "Vote",
+    embedded: false
+  },
+  {
+    name: "FlightController",
     embedded: false
   }
 ];
