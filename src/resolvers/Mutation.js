@@ -43,22 +43,29 @@ function post(parent, args, context, info) {
   })
 }
 
+async function updateLink(parent, args, context, info) {
+  console.log('updateLink', args)
+  const existingLink = await context.prisma.link({ id: args.id })
+  console.log('existingLink', existingLink)
+  if (!existingLink) {
+    throw new Error('No such link found by that ID')
+  }
+
+  let updatedLink = {...existingLink, ...args};
+  console.log("updated link", updatedLink);
+
+  return context.prisma.updateLink(updatedLink)
+}
+
 module.exports = {
   signup,
   login,
   post,
+  updateLink,
 }
 
 // Mutation: {
-  //   post: (parent, args) => {
-  //     const link = {
-  //       id: `link-${idCount++}`,
-  //       description: args.description,
-  //       url: args.url,
-  //     }
-  //     links.push(link)
-  //     return link
-  //   },
+
   //   updateLink: (parent, {id, url, description}) => {
   //     let found = _.findWhere(links, {id});
   //     if(found){
