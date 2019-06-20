@@ -6,6 +6,7 @@
   "author": "Corey Snyder <corey.snyder@aver.io>",
   "license": "MIT",
   "dependencies": {
-    "graphql-yoga": "^1.18.0"
+    "graphql-yoga": "^1.18.0",
+    "underscore": "^1.9.1"
   }
 }

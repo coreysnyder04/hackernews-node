@@ -1,4 +1,5 @@
 const { GraphQLServer } = require('graphql-yoga')
+const _ = require('underscore')
 
 let links = [{
   id: 'link-0',
@@ -10,8 +11,18 @@ let idCount = links.length
 
 const resolvers = {
   Query: {
-    info: () => null,
+    info: () => 'A clone of Hackernews',
     feed: () => links,
+    link: (parent, args) => {
+      let linkFound;
+      _.each(links, (link) => {
+        if(link.id === args.id){
+          linkFound = link;
+        }
+      })
+
+      return (linkFound) ? linkFound : {}
+    }
   },
   Mutation: {
     post: (parent, args) => {
@@ -22,7 +33,19 @@ const resolvers = {
       }
       links.push(link)
       return link
+    },
+    updateLink: (parent, {id, url, description}) => {
+      let found = _.findWhere(links, {id});
+      if(found){
+        found.url = url;
+        found.description = description;
+        return found
+      }
+    },
+    deleteLink: (parent, {id}) => {
+      links = _.reject(links, (link)=> link.id===id)
     }
+
   }
 }
 
