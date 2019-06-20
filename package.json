@@ -1,0 +1,8 @@
+{
+  "name": "hackernews-node",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@personal:coreysnyder04/hackernews-node.git",
+  "author": "Corey Snyder <corey.snyder@aver.io>",
+  "license": "MIT"
+}
